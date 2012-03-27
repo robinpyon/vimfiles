@@ -30,6 +30,7 @@ Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-unimpaired'
     Bundle 'tpope/vim-ragtag'
+    Bundle 'vim-scripts/JavaScript-Indent'
     Bundle 'vim-scripts/mru.vim'
     Bundle 'walm/jshint.vim'
     Bundle 'wincent/Command-T'
@@ -45,8 +46,8 @@ set nomodeline                      " disable modeline
 set clipboard=unnamed               " (MacVim) use system clipboard
 set noerrorbells                    " disable error bells
 set mouse=a                         " enable full mouse support
-set shell=/bin/bash\ -li            " enable interactive shell
-set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
+" set shell=/bin/bash\ -li            " enable interactive shell
+" set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
 set wildmenu
 set wildignore=*~,.git,tmp,*.log
 set wildmode=list:longest,full
