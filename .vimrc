@@ -14,6 +14,7 @@ Bundle 'gmarik/vundle'
     Bundle 'ap/vim-css-color'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
+    Bundle 'kien/ctrlp.vim'
     Bundle 'garbas/vim-snipmate'
     Bundle 'majutsushi/tagbar'
     Bundle 'mattn/zencoding-vim'
@@ -31,9 +32,10 @@ Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-unimpaired'
     Bundle 'tpope/vim-ragtag'
     Bundle 'vim-scripts/JavaScript-Indent'
+    Bundle 'vim-scripts/IndexedSearch'
     Bundle 'vim-scripts/mru.vim'
     Bundle 'walm/jshint.vim'
-    Bundle 'wincent/Command-T'
+    " Bundle 'wincent/Command-T'
 
 filetype plugin indent on           " enable loading plugins and indents based on file type (required for Vundle)
 
@@ -109,12 +111,12 @@ endif
     " Command-T
     """""""""""""""""""""""""""""""
     " Allow ESC and other keys to work as intended
-    if &term =~ "xterm" || &term =~ "screen"
-        let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
-        let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
-        let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
-    endif
-    let g:CommandTMaxHeight=15                      " set max window height
+    " if &term =~ "xterm" || &term =~ "screen"
+    "     let g:CommandTCancelMap     = ['<ESC>', '<C-c>']
+    "     let g:CommandTSelectNextMap = ['<C-n>', '<C-j>', '<ESC>OB']
+    "     let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
+    " endif
+    " let g:CommandTMaxHeight=15                      " set max window height
 
     " EasyMotion
     """""""""""""""""""""""""""""""
@@ -208,5 +210,9 @@ augroup myvimrchooks
     " autocmd bufwritepost .vimrc call Pl#Load()
 augroup END
 
-" enable GLSL highlighting
+" => Custom highlighting
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GLSL
 au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
+" .htaccess
+au BufNewFile,BufRead .htaccess setf apache 
