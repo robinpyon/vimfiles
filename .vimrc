@@ -53,6 +53,7 @@ set mouse=a                         " enable full mouse support
 set wildmenu
 set wildignore=*~,.git,tmp,*.log
 set wildmode=list:longest,full
+set visualbell                      " Suppress beeping
 
 
 " => Visual options
@@ -117,6 +118,12 @@ endif
     "     let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
     " endif
     " let g:CommandTMaxHeight=15                      " set max window height
+    
+
+    " Ctrl-P
+    """""""""""""""""""""""""""""""
+    let g:ctrlp_working_path_mode = 0               " don't manage working directory
+    let g:ctrlp_match_window_reversed = 0           " list from top to bottom
 
     " EasyMotion
     """""""""""""""""""""""""""""""
@@ -128,7 +135,7 @@ endif
 
     " NERDCommenter
     """""""""""""""""""""""""""""""
-    let g:NERDSpaceDelims=1                         " add extra space between comment delims
+    " let g:NERDSpaceDelims = 1                     " add extra space between comment delims
 
     " Neocomplcache
     """""""""""""""""""""""""""""""
@@ -185,6 +192,11 @@ nmap <silent> <leader>ev :e $MYVIMRC<CR>
 
 " Search and replace word at cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+
+    " Ctrl-P
+    """""""""""""""""""""""""""""""
+    nmap <C-B> :CtrlPBuffer<CR>
+    nmap <C-M> :CtrlPMRU<CR>
 
     " TagBar
     """""""""""""""""""""""""""""""
