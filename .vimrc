@@ -12,6 +12,7 @@ Bundle 'gmarik/vundle'
     """"""""""""""""""
     Bundle 'altercation/vim-colors-solarized'
     Bundle 'ap/vim-css-color'
+    Bundle 'benmills/vimux'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'kien/ctrlp.vim'
@@ -25,6 +26,7 @@ Bundle 'gmarik/vundle'
     Bundle 'Shougo/neocomplcache'
     Bundle 'tomtom/tlib_vim'
     Bundle 'tomtom/tcomment_vim'
+    Bundle 'tpope/vim-endwise'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
     Bundle 'tpope/vim-repeat'
@@ -141,6 +143,10 @@ endif
     """""""""""""""""""""""""""""""
     let g:neocomplcache_enable_at_startup = 1       " enable on startup
 
+    " Powerline
+    """""""""""""""""""""""""""""""
+    let g:Powerline_symbols = 'fancy'
+    
     " SnipMate
     """"""""""""""""""""""""""""""j"
     let g:snippets_dir="~/.vim/snippets/"
@@ -164,6 +170,9 @@ endif
     " Plug-in: Zencoding.vim
     let g:user_zen_expandabbr_key = '<c-e>'
 
+    " Vimux
+    """""""""""""""""""""""""""""""
+    let VimuxUseNearestPane = 1
 
 " => Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -175,23 +184,47 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Properly interpret arrow keys when run within a tmux session
+if &term =~ '^screen'
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 " Use tidy when using the = operator
 " http://vim.wikia.com/wiki/Cleanup_your_HTML#Using_tidy_for_html_files
 " TODO: what is setlocal?
 " :setlocal equalprg=tidyp\ -indent\ -quiet\ --indent-spaces\ 4\ --show-body-only\ 1\ --show-errors\ 0\ --tidy-mark\ 0\ --wrap\ 0
 
-" Toggle display of invisible / non-printable characters
-nmap <leader>l :set list!<CR>
+" Preserve indentation while pasting text from the OS X clipboard
+noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-" Tidy visually selected lines (indenting, quiet mode, no logging)
-" http://vim.wikia.com/wiki/Cleanup_your_HTML
-vmap <leader>t :!tidy -q -i --show-errors 0<CR>
+
+" Toggle display of invisible / non-printable characters
+nnoremap <leader>l :set list!<CR>
+
+" Yank text to the OS X clipboard
+noremap <leader>y "*y
+noremap <leader>yy "*Y
 
 " Easy access to our .vimrc
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
 
 " Search and replace word at cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+
+" Allow in/exdenting with tab and single angled quotes, while retaining visual selection
+vnoremap > >gv
+vnoremap < <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+" Tidy visually selected lines (indenting, quiet mode, no logging)
+" http://vim.wikia.com/wiki/Cleanup_your_HTML
+vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
+
+
 
     " Ctrl-P
     """""""""""""""""""""""""""""""
@@ -211,6 +244,20 @@ nnoremap <leader>s :%s/\<<C-r><C-w>\>/
     vmap <C-Up> [egv
     vmap <C-Down> ]egv
 
+    " Vimux
+    """""""""""""""""""""""""""""""
+    " Run the current file with rspec
+    map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
+    " Prompt for a command to run
+    map <Leader>rp :PromptVimTmuxCommand<CR>
+    " Run last command executed by RunVimTmuxCommand
+    map <Leader>rl :RunLastVimTmuxCommand<CR>
+    " Inspect runner pane
+    map <Leader>ri :InspectVimTmuxRunner<CR>
+    " Close all other tmux panes in current window
+    map <Leader>rx :CloseVimTmuxPanes<CR>
+    " Interrupt any command running in the runner pane
+    map <Leader>rs :InterruptVimTmuxRunner<CR>
 
 " => Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
