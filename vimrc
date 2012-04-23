@@ -77,7 +77,6 @@ set splitright                      " new horizontal splits on the right
 set splitbelow                      " new vertical splits on the bottom
 set textwidth=0
 set wrap                            " wrap visually, rather than changing text in the buffer
-colorscheme solarized
 
 
 " => Search and replace
@@ -154,8 +153,9 @@ endif
     " Solarized
     """""""""""""""""""""""""""""""
     call togglebg#map("<F5>")                       " toggle between dark and light modes
-    let g:solarized_termcolors=16
+    let g:solarized_termcolors=16                   " set to 16 as terminal emulator palette is being used
     let g:solarized_visibility="normal"             " visibility mode of hidden characters
+    colorscheme solarized
 
     " TagBar
     """""""""""""""""""""""""""""""
