@@ -33,9 +33,10 @@ Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-unimpaired'
     Bundle 'tpope/vim-ragtag'
+    Bundle 'tpope/vim-rails'
     Bundle 'vim-scripts/JavaScript-Indent'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'vim-scripts/mru.vim'
+    " Bundle 'vim-scripts/mru.vim'
     Bundle 'walm/jshint.vim'
     " Bundle 'wincent/Command-T'
 
@@ -92,7 +93,7 @@ set incsearch                       " show 'best match so far' as search strings
 set autoindent                      " keep indentation from previous line
 set expandtab                       " use spaces in place of tab characters
 set shiftwidth=4                    " number of spaces to use for autoindenting
-set softtabstop=4                   " number of spaces to use when pressing <TAB> and pressing backspace
+set softtabstop=4                   " number of spaces to use when pressing <tab> and pressing backspace
 set tabstop=4                       " the width of a tab in spaces
 set smartindent                     " automatically inserts indentation in some cases
 set cindent                         " like smartindent, but stricter and more customisable
@@ -224,8 +225,6 @@ vnoremap <S-Tab> <gv
 " http://vim.wikia.com/wiki/Cleanup_your_HTML
 vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
 
-
-
     " Ctrl-P
     """""""""""""""""""""""""""""""
     nmap <C-B> :CtrlPBuffer<CR>
@@ -268,6 +267,15 @@ augroup myvimrchooks
     autocmd bufwritepost .vimrc source ~/.vimrc
     " autocmd bufwritepost .vimrc call Pl#Load()
 augroup END
+
+" File type specific settings
+" TODO: consider moving these into separate files placed in
+" ~/.vim/after/ftplugin/%filetype%.vim
+" http://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
+au FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 
+
+" Open NERDTree on launch
+autocmd VimEnter * NERDTree
 
 " => Custom highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
