@@ -4,14 +4,15 @@
 " => Vundle required settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off                        " disable file type detection for loading specific options
-set rtp+=~/.vim/bundle/vundle/      " add vundle to runtimepath
+set rtp+=~/.vim/bundle/vundle/      " add vundle to runtimepath 
 call vundle#rc()
+
 Bundle 'gmarik/vundle'              
 
     " My Bundles here:
     """"""""""""""""""
     Bundle 'altercation/vim-colors-solarized'
-    Bundle 'ap/vim-css-color'
+    " Bundle 'ap/vim-css-color'
     Bundle 'benmills/vimux'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
@@ -20,6 +21,7 @@ Bundle 'gmarik/vundle'
     Bundle 'majutsushi/tagbar'
     Bundle 'mattn/zencoding-vim'
     Bundle 'MarcWeber/vim-addon-mw-utils'
+    Bundle 'pgr0ss/vimux-ruby-test'
     Bundle 'Raimondi/delimitMate'
     Bundle 'scrooloose/nerdtree'
     Bundle 'scrooloose/syntastic'
@@ -43,24 +45,9 @@ Bundle 'gmarik/vundle'
 filetype plugin indent on           " enable loading plugins and indents based on file type (required for Vundle)
 
 
-" => General Options
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible                    " disable vi compatibility
-set encoding=utf-8
-set nomodeline                      " disable modeline
-set clipboard=unnamed               " (MacVim) use system clipboard
-set noerrorbells                    " disable error bells
-set mouse=a                         " enable full mouse support
-" set shell=/bin/bash\ -li            " enable interactive shell
-" set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
-set wildmenu
-set wildignore=*~,.git,tmp,*.log
-set wildmode=list:longest,full
-set visualbell                      " Suppress beeping
-
-
 " => Visual options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 syntax on                           " Enable syntax highlighting
 set background=dark
 set backspace=indent,eol,start      " ensure backspace works like in other programs
@@ -78,6 +65,23 @@ set splitright                      " new horizontal splits on the right
 set splitbelow                      " new vertical splits on the bottom
 set textwidth=0
 set wrap                            " wrap visually, rather than changing text in the buffer
+
+
+" => General Options
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible                    " disable vi compatibility
+set encoding=utf-8
+set nomodeline                      " disable modeline
+set clipboard=unnamed               " (MacVim) use system clipboard
+set noerrorbells                    " disable error bells
+set mouse=a                         " enable full mouse support
+" TODO: use interactive shell when trying to run Plask.app
+" set shell=/bin/bash\ -li            " enable interactive shell
+" set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
+set wildmenu
+set wildignore=*~,.git,tmp,*.log
+set wildmode=list:longest,full
+set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, trying to scroll past boundaries)
 
 
 " => Search and replace
@@ -120,7 +124,6 @@ endif
     "     let g:CommandTSelectPrevMap = ['<C-p>', '<C-k>', '<ESC>OA']
     " endif
     " let g:CommandTMaxHeight=15                      " set max window height
-    
 
     " Ctrl-P
     """""""""""""""""""""""""""""""
@@ -129,7 +132,7 @@ endif
 
     " EasyMotion
     """""""""""""""""""""""""""""""
-    " let g:EasyMotion_leader_key = '<Leader>' 
+    let g:EasyMotion_leader_key = '<Leader>' 
 
     " MRU
     """""""""""""""""""""""""""""""
@@ -164,10 +167,6 @@ endif
         \ 'ctagsbin' : '/usr/local/bin/jsctags'
     \ }
 
-    " T-Comment
-    """""""""""""""""""""""""""""""
-    " map <leader>c <c-_><c-_>
-
     " Plug-in: Zencoding.vim
     let g:user_zen_expandabbr_key = '<c-e>'
 
@@ -175,6 +174,7 @@ endif
     """""""""""""""""""""""""""""""
     let VimuxUseNearestPane = 1
 
+    
 " => Key mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","                 " change the mapleader from \ to ,
@@ -201,7 +201,6 @@ endif
 " Preserve indentation while pasting text from the OS X clipboard
 noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-
 " Toggle display of invisible / non-printable characters
 nnoremap <leader>l :set list!<CR>
 
@@ -209,8 +208,9 @@ nnoremap <leader>l :set list!<CR>
 noremap <leader>y "*y
 noremap <leader>yy "*Y
 
-" Easy access to our .vimrc
+" Easy access to commonly accessed rc files
 nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <leader>eb :e ~/.bashrc<CR>
 
 " Search and replace word at cursor
 nnoremap <leader>s :%s/\<<C-r><C-w>\>/
@@ -258,14 +258,20 @@ vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
     " Interrupt any command running in the runner pane
     map <Leader>rs :InterruptVimTmuxRunner<CR>
 
+    " Vimux ruby test
+    """""""""""""""""""""""""""""""
+    map <Leader>rf :RunRubyFocusedTest
+    map <Leader>rc :RunRubyFocusedContext
+    map <Leader>rt :RunAllRubyTests
+
 " => Autocommands
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " source .vimrc when it's written to disk
 " http://stackoverflow.com/a/2400289
 augroup myvimrchooks
-    au!
-    autocmd bufwritepost .vimrc source ~/.vimrc
-    " autocmd bufwritepost .vimrc call Pl#Load()
+     au!
+     autocmd bufwritepost .vimrc source ~/.vimrc
+     " autocmd bufwritepost .vimrc call Pl#Load()
 augroup END
 
 " File type specific settings
@@ -276,6 +282,8 @@ au FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Open NERDTree on launch
 autocmd VimEnter * NERDTree
+autocmd BufEnter * NERDTreeMirror
+autocmd VimEnter * wincmd w         " switch to main window
 
 " => Custom highlighting
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""
