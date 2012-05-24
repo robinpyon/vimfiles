@@ -28,7 +28,9 @@ Bundle 'gmarik/vundle'
     Bundle 'Shougo/neocomplcache'
     Bundle 'tomtom/tlib_vim'
     Bundle 'tomtom/tcomment_vim'
+    Bundle 'tpope/vim-bundler'
     Bundle 'tpope/vim-endwise'
+    Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-markdown'
     Bundle 'tpope/vim-repeat'
@@ -38,9 +40,7 @@ Bundle 'gmarik/vundle'
     Bundle 'tpope/vim-rails'
     Bundle 'vim-scripts/JavaScript-Indent'
     Bundle 'vim-scripts/IndexedSearch'
-    " Bundle 'vim-scripts/mru.vim'
     Bundle 'walm/jshint.vim'
-    " Bundle 'wincent/Command-T'
 
 filetype plugin indent on           " enable loading plugins and indents based on file type (required for Vundle)
 
@@ -149,6 +149,8 @@ endif
     " Powerline
     """""""""""""""""""""""""""""""
     let g:Powerline_symbols = 'fancy'
+    " let g:Powerline_theme = 'skwp'
+    " let g:Powerline_colorscheme = 'skwp'
     
     " SnipMate
     """"""""""""""""""""""""""""""j"
@@ -168,7 +170,8 @@ endif
     \ }
 
     " Plug-in: Zencoding.vim
-    let g:user_zen_expandabbr_key = '<c-e>'
+    """""""""""""""""""""""""""""""
+    let g:user_zen_leader_key = '<c-e>'
 
     " Vimux
     """""""""""""""""""""""""""""""
