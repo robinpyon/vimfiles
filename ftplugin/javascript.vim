@@ -22,5 +22,5 @@
 "map <F4> :silent execute "!plask % &" \| redraw!<CR>
 "map <F4> :execute "!plask %" \| redraw!<CR>
 
-map <F3> :silent execute "!open_plask app.js >/dev/null &" \| redraw!<CR>
-map <F4> :silent execute "!open_plask % >/dev/null &" \| redraw!<CR>
+" map <F3> :silent execute "!open_plask app.js >/dev/null &" \| redraw!<CR>
+" map <F4> :silent execute "!open_plask % >/dev/null &" \| redraw!<CR>

@@ -41,17 +41,24 @@
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-unimpaired'
     Bundle 'vim-scripts/IndexedSearch'
+    Bundle 'vim-scripts/Toggle'
 
     " General Programming
     Bundle 'garbas/vim-snipmate'
+    Bundle 'ervandew/supertab'
     Bundle 'godlygeek/tabular'
+    Bundle 'kana/vim-smartinput'
     Bundle 'majutsushi/tagbar'
-    Bundle 'Raimondi/delimitMate'
+    " Bundle 'Raimondi/delimitMate'
     Bundle 'scrooloose/syntastic'
     Bundle 'Shougo/neocomplcache'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-ragtag'
     Bundle 'tomtom/tcomment_vim'
+
+    " C based (C / C++ / Objective-C / Objective-C++)
+    Bundle 'Rip-Rip/clang_complete'
+    Bundle 'vim-scripts/a.vim'
 
     " HTML / CSS
     Bundle 'mattn/zencoding-vim'
@@ -85,13 +92,22 @@
     set noerrorbells                    " disable error bells
     set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
 
-    " Could use * rather than *.*, but I prefer to leave .files unsaved
-    au BufWinLeave *.* silent! mkview  "make vim save view (state) (folds, cursor, etc)
-    au BufWinEnter *.* silent! loadview "make vim load view (state) (folds, cursor, etc))
-
     " Source .vimrc when saved and reload powerline
     au BufWritePost .vimrc source ~/.vimrc
     au BufWritePost .vimrc call Pl#Load()
+
+    " Could use * rather than *.*, but I prefer to leave .files unsaved (This conflicts with rails.vim))
+    " au BufWinLeave *.* silent! mkview       " Make vim save view (state) (folds, cursor, etc)
+    " au BufWinEnter *.* silent! loadview     " Make vim load view (state) (folds, cursor, etc))
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+
 " }
 
 " Vim UI {
@@ -101,6 +117,7 @@
     set cpoptions+=$
     set cursorline
     set diffopt=vertical                " default vimdiff to vertical split
+    set foldopen=search,undo            " open folds on specific commands
     set formatoptions+=1
     set hlsearch                        " highlight search items
     set ignorecase                      " case insensitive search if search is all lowercase
@@ -175,11 +192,11 @@
     endif
 
     " Stupid shift key fixes
-    cmap W w
-    cmap WQ wq
-    cmap wQ wq
-    cmap Q q
-    cmap Tabe tabe
+    " cmap W w
+    " cmap WQ wq
+    " cmap wQ wq
+    " cmap Q q
+    " cmap Tabe tabe
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -196,30 +213,37 @@
     nmap <leader>f8 :set foldlevel=8<CR>
     nmap <leader>f9 :set foldlevel=9<CR>
 
-    " Clearing highlighted search
-    nmap <silent> <leader>/ :nohlsearch<CR>
-
     " Use tidy when using the = operator
     " http://vim.wikia.com/wiki/Cleanup_your_HTML#Using_tidy_for_html_files
     " TODO: what is setlocal?
     " :setlocal equalprg=tidyp\ -indent\ -quiet\ --indent-spaces\ 4\ --show-body-only\ 1\ --show-errors\ 0\ --tidy-mark\ 0\ --wrap\ 0
 
-    " Preserve indentation while pasting text from the OS X clipboard
-    noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+    " Easy access to commonly accessed rc files
+    nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+    nnoremap <silent> <leader>eb :e ~/.bashrc<CR>
+
+    " Close buffer but don't close split
+    nmap <leader>d :b#<bar>bd#<CR>
 
     " Toggle display of invisible / non-printable characters
     nnoremap <leader>l :set list!<CR>
+
+    " Preserve indentation while pasting text from the OS X clipboard
+    noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+
+    " Search and replace word at cursor
+    nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+
+    " Tidy visually selected lines (indenting, quiet mode, no logging)
+    " http://vim.wikia.com/wiki/Cleanup_your_HTML
+    vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
 
     " Yank text to the OS X clipboard
     noremap <leader>y "*y
     noremap <leader>yy "*Y
 
-    " Easy access to commonly accessed rc files
-    nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-    nnoremap <silent> <leader>eb :e ~/.bashrc<CR>
-
-    " Search and replace word at cursor
-    nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+    " Clearing highlighted search
+    nmap <silent> <leader>/ :nohlsearch<CR>
 
     " Allow in/exdenting with tab and single angled quotes, while retaining visual selection
     vnoremap > >gv
@@ -227,10 +251,17 @@
     vnoremap <Tab> >gv
     vnoremap <S-Tab> <gv
 
-    " Tidy visually selected lines (indenting, quiet mode, no logging)
-    " http://vim.wikia.com/wiki/Cleanup_your_HTML
-    vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
+" }
 
+" GUI settings {
+   if has('gui_running')
+        set guioptions-=T           " remove the toolbar
+        set lines=40                " 40 lines of text instead of 24,
+        set linespace=2
+        set guifont=Inconsolata\ for\ Powerline:h16
+    else
+        "set term=builtin_ansi       " Make arrow and other keys work
+    endif
 " }
 
 " Plugins {
@@ -261,6 +292,9 @@
         map <leader>e :NERDTreeFind<CR>
         nmap <leader>nt :NERDTreeFind<CR>
 
+        " Change the current working directory to NERDTree root
+        let NERDTreeChDirMode=2
+
         let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
         let NERDTreeShowHidden=1
     " }
@@ -271,7 +305,7 @@
 
     " Powerline {
         let g:Powerline_symbols = 'fancy'
-        let g:Powerline_colorscheme = 'skwp'
+        " let g:Powerline_colorscheme = 'skwp'
     " }
 
     " SnipMate {
@@ -283,6 +317,13 @@
         let g:solarized_termcolors=16                   " set to 16 as terminal emulator palette is being used
         let g:solarized_visibility="normal"             " visibility mode of hidden characters
         colorscheme solarized
+    " }
+
+    " Syntastic {
+        let g:syntastic_cpp_check_header = 1
+        let g:syntastic_cpp_include_dirs = [ '../include', 'include', '../blocks', '/Users/rpyon/dev/cinder_0.8.4/include', '/Users/rpyon/dev/cinder_0.8.4/boost' ]
+        let g:syntastic_cpp_auto_refresh_includes = 1
+        let g:syntastic_cpp_remove_include_errors = 1
     " }
     
     " Tabularize {
@@ -334,14 +375,16 @@
     " }
 
     " Vimux ruby test {
-        map <Leader>rf :RunRubyFocusedTest
-        map <Leader>rc :RunRubyFocusedContext
-        map <Leader>rt :RunAllRubyTests
+        map <Leader>rf :RunRubyFocusedTest<CR>
+        map <Leader>rc :RunRubyFocusedContext<CR>
+        map <Leader>rt :RunAllRubyTests<CR>
     " }
     
     " Zencoding.vim {
-        let g:user_zen_leader_key = '<c-e>'
+        " let g:user_zen_leader_key = '<c-e>'
+        let g:user_zen_expandabbr_key = '<c-e>'
     " }
+
 
 " }
     
