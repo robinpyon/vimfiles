@@ -35,6 +35,7 @@
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
+    Bundle 'milkypostman/vim-togglelist'
     Bundle 'scrooloose/nerdtree'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
@@ -44,21 +45,22 @@
     Bundle 'vim-scripts/Toggle'
 
     " General Programming
-    Bundle 'garbas/vim-snipmate'
+    " Bundle 'garbas/vim-snipmate'
     Bundle 'ervandew/supertab'
-    Bundle 'godlygeek/tabular'
+    " Bundle 'godlygeek/tabular'
     Bundle 'kana/vim-smartinput'
     Bundle 'majutsushi/tagbar'
     " Bundle 'Raimondi/delimitMate'
     Bundle 'scrooloose/syntastic'
     Bundle 'Shougo/neocomplcache'
+    Bundle 'SirVer/ultisnips'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tpope/vim-ragtag'
     Bundle 'tomtom/tcomment_vim'
 
     " C based (C / C++ / Objective-C / Objective-C++)
-    Bundle 'Rip-Rip/clang_complete'
-    Bundle 'vim-scripts/a.vim'
+    " Bundle 'Rip-Rip/clang_complete'
+    " Bundle 'vim-scripts/a.vim'
 
     " HTML / CSS
     Bundle 'mattn/zencoding-vim'
@@ -159,6 +161,13 @@
     " Custom syntax highlighting
     " GLSL
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
+
+    " JavaScript
+    au BufRead,BufNewFile *.json,*.ejs setf javascript
+
+    " Ruby
+    au BufRead,BufNewFile *.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
+
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache 
 
@@ -245,11 +254,16 @@
     " Clearing highlighted search
     nmap <silent> <leader>/ :nohlsearch<CR>
 
+    " Enable shift-tab to outdent in normal and insert mode
+    nmap <S-Tab> <<
+    imap <S-Tab> <Esc><<i
+
     " Allow in/exdenting with tab and single angled quotes, while retaining visual selection
     vnoremap > >gv
     vnoremap < <gv
     vnoremap <Tab> >gv
     vnoremap <S-Tab> <gv
+
 
 " }
 
@@ -275,7 +289,7 @@
     " }
 
     " EasyMotion {
-        " let g:EasyMotion_leader_key = '<Leader>' 
+        let g:EasyMotion_leader_key = '<Leader>' 
     " }
 
     " Fugitive {
@@ -309,7 +323,7 @@
     " }
 
     " SnipMate {
-        let g:snippets_dir="~/.vim/snippets/"
+        " let g:snippets_dir="~/.vim/snippets/"
     " }
 
     " Solarized {
@@ -318,7 +332,7 @@
         let g:solarized_visibility="normal"             " visibility mode of hidden characters
         colorscheme solarized
     " }
-
+    
     " Syntastic {
         let g:syntastic_cpp_check_header = 1
         let g:syntastic_cpp_include_dirs = [ '../include', 'include', '../blocks', '/Users/rpyon/dev/cinder_0.8.4/include', '/Users/rpyon/dev/cinder_0.8.4/boost' ]
@@ -344,7 +358,16 @@
     " TagBar {
         nmap <F8> :TagbarToggle<CR>
     " }
+
+    " Togglelist {
+        " nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
+        nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
+    " }
     
+    " UltiSnips {
+        nmap <F4> :call UltiSnips_ListSnippets()<CR>
+    " }
+
     " Unimpaired {
     
         " Bubble single lines
@@ -391,3 +414,4 @@
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
 " set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
+
