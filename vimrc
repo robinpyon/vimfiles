@@ -88,6 +88,7 @@
     set background=dark                 " assume a dark background
     filetype plugin indent on           " automatically detect file types
     syntax on                           " Enable syntax highlighting
+    set synmaxcol=120                   " Limit highlighting to to 120 cols so vim doesn't choke on minified files
     set encoding=utf-8
     set history=1000
     set mouse=a                         " enable full mouse support
