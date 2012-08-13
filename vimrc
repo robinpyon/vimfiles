@@ -1,5 +1,5 @@
 " Modeline and Notes {
-" vim: set foldmarker={,} foldlevel=0 foldmethod=marker:
+" vim: set foldmarker={,} foldlevel=0 foldmethod=marker foldopen+=search:
 "
 "   Robin Pyon's VIM config
 "   robinpyon.net / @robinpyon
@@ -20,6 +20,7 @@
         set rtp+=~/.vim/bundle/vundle/
         call vundle#rc()
     " }
+    
 " }
 
 " Bundles {
@@ -30,13 +31,13 @@
     Bundle 'tomtom/tlib_vim'
 
     " General 
-    Bundle 'altercation/vim-colors-solarized'
     Bundle 'benmills/vimux'
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     Bundle 'milkypostman/vim-togglelist'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'skwp/vim-colors-solarized'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-surround'
@@ -47,7 +48,6 @@
     " General Programming
     " Bundle 'garbas/vim-snipmate'
     Bundle 'ervandew/supertab'
-    " Bundle 'godlygeek/tabular'
     Bundle 'kana/vim-smartinput'
     Bundle 'majutsushi/tagbar'
     " Bundle 'Raimondi/delimitMate'
@@ -66,10 +66,20 @@
     Bundle 'mattn/zencoding-vim'
     Bundle 'tpope/vim-haml'
 
-    " JavaScript
-    Bundle 'walm/jshint.vim'
-    Bundle 'vim-scripts/vim-json-bundle'
-    Bundle 'taxilian/vim-web-indent'
+    " Jade {
+
+        " Syntax higlighting + indentation
+        Bundle 'digitaltoad/vim-jade'   
+
+    " }
+
+    " JavaScript {
+
+        Bundle 'walm/jshint.vim'
+        Bundle 'vim-scripts/vim-json-bundle'
+        Bundle 'taxilian/vim-web-indent'
+    
+    " }
 
     " Python
 
@@ -78,6 +88,8 @@
     Bundle 'tpope/vim-bundler'
     Bundle 'tpope/vim-endwise'
     Bundle 'tpope/vim-rails'
+
+    Bundle 'wavded/vim-stylus'
 
     " Misc
     Bundle 'tpope/vim-markdown'
@@ -120,7 +132,7 @@
     set cpoptions+=$
     set cursorline
     set diffopt=vertical                " default vimdiff to vertical split
-    set foldopen=search,undo            " open folds on specific commands
+    set foldopen+=search,undo           " open folds on specific commands
     set formatoptions+=1
     set hlsearch                        " highlight search items
     set ignorecase                      " case insensitive search if search is all lowercase
@@ -155,24 +167,25 @@
     set wrap                            " wrap visually, rather than changing text in the buffer
 
     " File type specific settings
-    " TODO: consider moving these into separate files placed in ~/.vim/after/ftplugin/%filetype%.vim
-    " http://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
-    au FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
-    " Custom syntax highlighting
     " GLSL
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
+    
+    " Jade, Stylus
+    au BufRead,BufNewFile *.jade,*.styl setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " JavaScript
-    au BufRead,BufNewFile *.json,*.ejs setf javascript
+    au BufRead,BufNewFile *.json,*.ejs setf javascript 
+    au FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " Ruby
     au BufRead,BufNewFile *.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
+    au FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache 
 
-    " Remove trailing whitespaces and ^M chars
+    " On save: remove trailing whitespaces and ^M chars 
     au FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))   
     
 " }
@@ -279,140 +292,6 @@
     endif
 " }
 
-" Plugins {
-    
-    " Ctrl-P {
-        let g:ctrlp_working_path_mode = 0               " don't manage working directory
-        let g:ctrlp_match_window_reversed = 0           " list from top to bottom
-
-        nmap <C-B> :CtrlPBuffer<CR>
-        nmap <C-M> :CtrlPMRU<CR>
-    " }
-
-    " EasyMotion {
-        let g:EasyMotion_leader_key = '<Leader>' 
-    " }
-
-    " Fugitive {
-        nnoremap <silent> <leader>gs :Gstatus<CR>
-        nnoremap <silent> <leader>gd :Gdiff<CR>
-        nnoremap <silent> <leader>gc :Gcommit<CR>
-        nnoremap <silent> <leader>gb :Gblame<CR>
-        nnoremap <silent> <leader>gl :Glog<CR>
-        nnoremap <silent> <leader>gp :Git push<CR>
-    " }
-
-    " NERDTree {
-        map <F3> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-        map <leader>e :NERDTreeFind<CR>
-        nmap <leader>nt :NERDTreeFind<CR>
-
-        " Change the current working directory to NERDTree root
-        let NERDTreeChDirMode=2
-
-        let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-        let NERDTreeShowHidden=1
-    " }
-
-    " Neocomplcache {
-        let g:neocomplcache_enable_at_startup = 1       " enable on startup
-    " }
-
-    " Powerline {
-        let g:Powerline_symbols = 'fancy'
-        " let g:Powerline_colorscheme = 'skwp'
-    " }
-
-    " SnipMate {
-        " let g:snippets_dir="~/.vim/snippets/"
-    " }
-
-    " Solarized {
-        call togglebg#map("<F5>")                       " toggle between dark and light modes
-        let g:solarized_termcolors=16                   " set to 16 as terminal emulator palette is being used
-        let g:solarized_visibility="normal"             " visibility mode of hidden characters
-        colorscheme solarized
-    " }
-    
-    " Syntastic {
-        let g:syntastic_cpp_check_header = 1
-        let g:syntastic_cpp_include_dirs = [ '../include', 'include', '../blocks', '/Users/rpyon/dev/cinder_0.8.4/include', '/Users/rpyon/dev/cinder_0.8.4/boost' ]
-        let g:syntastic_cpp_auto_refresh_includes = 1
-        let g:syntastic_cpp_remove_include_errors = 1
-    " }
-    
-    " Tabularize {
-
-        nmap <Leader>a= :Tabularize /=<CR>
-        vmap <Leader>a= :Tabularize /=<CR>
-        nmap <Leader>a: :Tabularize /:<CR>
-        vmap <Leader>a: :Tabularize /:<CR>
-        nmap <Leader>a:: :Tabularize /:\zs<CR>
-        vmap <Leader>a:: :Tabularize /:\zs<CR>
-        nmap <Leader>a, :Tabularize /,<CR>
-        vmap <Leader>a, :Tabularize /,<CR>
-        nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-        vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
-
-    " }
- 
-    " TagBar {
-        nmap <F8> :TagbarToggle<CR>
-    " }
-
-    " Togglelist {
-        " nmap <script> <silent> <leader>l :call ToggleLocationList()<CR>
-        nmap <script> <silent> <leader>q :call ToggleQuickfixList()<CR>
-    " }
-    
-    " UltiSnips {
-        nmap <F4> :call UltiSnips_ListSnippets()<CR>
-    " }
-
-    " Unimpaired {
-    
-        " Bubble single lines
-        " nmap <C-Up> [e
-        nmap <C-Up> :poo
-        nmap <C-Down> ]e
-        " Bubble multiple lines
-        vmap <C-Up> [egv
-        vmap <C-Down> ]egv
-
-    " }
-    
-    " Vimux {
-        let VimuxUseNearestPane = 1
-
-        " Run the current file with rspec
-        map <Leader>rb :call RunVimTmuxCommand("clear; rspec " . bufname("%"))<CR>
-        " Prompt for a command to run
-        map <Leader>rp :PromptVimTmuxCommand<CR>
-        " Run last command executed by RunVimTmuxCommand
-        map <Leader>rl :RunLastVimTmuxCommand<CR>
-        " Inspect runner pane
-        map <Leader>ri :InspectVimTmuxRunner<CR>
-        " Close all other tmux panes in current window
-        map <Leader>rx :CloseVimTmuxPanes<CR>
-        " Interrupt any command running in the runner pane
-        map <Leader>rs :InterruptVimTmuxRunner<CR>
-    " }
-
-    " Vimux ruby test {
-        map <Leader>rf :RunRubyFocusedTest<CR>
-        map <Leader>rc :RunRubyFocusedContext<CR>
-        map <Leader>rt :RunAllRubyTests<CR>
-    " }
-    
-    " Zencoding.vim {
-        " let g:user_zen_leader_key = '<c-e>'
-        let g:user_zen_expandabbr_key = '<c-e>'
-    " }
-
-
-" }
-    
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
 " set shortmess=atI                   " suppress 'Press ENTER or type command to continue' messages
-
