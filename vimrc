@@ -31,11 +31,11 @@
     Bundle 'tomtom/tlib_vim'
 
     " General 
-    Bundle 'benmills/vimux'
+    " Bundle 'benmills/vimux'
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
-    Bundle 'milkypostman/vim-togglelist'
+    " Bundle 'milkypostman/vim-togglelist'
     Bundle 'scrooloose/nerdtree'
     Bundle 'skwp/vim-colors-solarized'
     Bundle 'tpope/vim-eunuch'
@@ -43,19 +43,17 @@
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-unimpaired'
     Bundle 'vim-scripts/IndexedSearch'
-    Bundle 'vim-scripts/Toggle'
+    " Bundle 'vim-scripts/Toggle'
 
     " General Programming
-    " Bundle 'garbas/vim-snipmate'
     Bundle 'ervandew/supertab'
-    Bundle 'kana/vim-smartinput'
-    Bundle 'majutsushi/tagbar'
-    " Bundle 'Raimondi/delimitMate'
+    " Bundle 'majutsushi/tagbar'
+    Bundle 'jiangmiao/auto-pairs'
     Bundle 'scrooloose/syntastic'
     Bundle 'Shougo/neocomplcache'
     Bundle 'SirVer/ultisnips'
     Bundle 'tpope/vim-fugitive'
-    Bundle 'tpope/vim-ragtag'
+    " Bundle 'tpope/vim-ragtag'
     Bundle 'tomtom/tcomment_vim'
 
     " C based (C / C++ / Objective-C / Objective-C++)
@@ -64,31 +62,25 @@
 
     " HTML / CSS
     Bundle 'mattn/zencoding-vim'
-    Bundle 'tpope/vim-haml'
+    " Bundle 'tpope/vim-haml'
 
-    " Jade {
+    " Jade 
+    " Syntax higlighting + indentation
+    Bundle 'digitaltoad/vim-jade'   
 
-        " Syntax higlighting + indentation
-        Bundle 'digitaltoad/vim-jade'   
-
-    " }
-
-    " JavaScript {
-
-        Bundle 'walm/jshint.vim'
-        Bundle 'vim-scripts/vim-json-bundle'
-        Bundle 'taxilian/vim-web-indent'
-    
-    " }
-
-    " Python
+    " JavaScript
+    Bundle 'walm/jshint.vim'
+    Bundle 'vim-scripts/vim-json-bundle'
+    " Bundle 'taxilian/vim-web-indent'
 
     " Ruby
-    Bundle 'pgr0ss/vimux-ruby-test'
-    Bundle 'tpope/vim-bundler'
-    Bundle 'tpope/vim-endwise'
-    Bundle 'tpope/vim-rails'
+    " Bundle 'pgr0ss/vimux-ruby-test'
+    " Bundle 'tpope/vim-bundler'
+    " NOTE: endwise conflics with vim-smartinput
+    " Bundle 'tpope/vim-endwise'
+    " Bundle 'tpope/vim-rails'
 
+    " Stylus syntax highlighting
     Bundle 'wavded/vim-stylus'
 
     " Misc
@@ -108,7 +100,7 @@
     set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
 
     " Source .vimrc when saved and reload powerline
-    au BufWritePost .vimrc source ~/.vimrc
+    " au BufWritePost .vimrc source ~/.vimrc
     au BufWritePost .vimrc call Pl#Load()
 
     " Could use * rather than *.*, but I prefer to leave .files unsaved (This conflicts with rails.vim))
@@ -166,7 +158,9 @@
     set smartindent                     " automatically inserts indentation in some cases
     set wrap                            " wrap visually, rather than changing text in the buffer
 
-    " File type specific settings
+" }
+
+" Filetype specific {
 
     " GLSL
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
@@ -224,18 +218,6 @@
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
 
-    " Code folding options
-    nmap <leader>f0 :set foldlevel=0<CR>
-    nmap <leader>f1 :set foldlevel=1<CR>
-    nmap <leader>f2 :set foldlevel=2<CR>
-    nmap <leader>f3 :set foldlevel=3<CR>
-    nmap <leader>f4 :set foldlevel=4<CR>
-    nmap <leader>f5 :set foldlevel=5<CR>
-    nmap <leader>f6 :set foldlevel=6<CR>
-    nmap <leader>f7 :set foldlevel=7<CR>
-    nmap <leader>f8 :set foldlevel=8<CR>
-    nmap <leader>f9 :set foldlevel=9<CR>
-
     " Use tidy when using the = operator
     " http://vim.wikia.com/wiki/Cleanup_your_HTML#Using_tidy_for_html_files
     " TODO: what is setlocal?
@@ -291,6 +273,8 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }
+
+command Vhosts e /private/etc/apache2/extra/httpd-vhosts.conf
 
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
