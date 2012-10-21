@@ -35,7 +35,7 @@
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
-    " Bundle 'milkypostman/vim-togglelist'
+    Bundle 'milkypostman/vim-togglelist'
     Bundle 'scrooloose/nerdtree'
     Bundle 'skwp/vim-colors-solarized'
     Bundle 'tpope/vim-eunuch'
@@ -71,7 +71,7 @@
     " JavaScript
     Bundle 'walm/jshint.vim'
     Bundle 'vim-scripts/vim-json-bundle'
-    " Bundle 'taxilian/vim-web-indent'
+    Bundle 'taxilian/vim-web-indent'
 
     " Ruby
     " Bundle 'pgr0ss/vimux-ruby-test'
@@ -92,12 +92,13 @@
     set background=dark                 " assume a dark background
     filetype plugin indent on           " automatically detect file types
     syntax on                           " Enable syntax highlighting
-    set synmaxcol=120                   " Limit highlighting to to 120 cols so vim doesn't choke on minified files
+    set synmaxcol=2048                   " Limit highlighting to to 120 cols so vim doesn't choke on minified files
     set encoding=utf-8
     set history=1000
     set mouse=a                         " enable full mouse support
     set noerrorbells                    " disable error bells
     set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
+    set shm+=I                          " Hide startup message
 
     " Source .vimrc when saved and reload powerline
     " au BufWritePost .vimrc source ~/.vimrc
@@ -152,9 +153,9 @@
 " Formatting {
     set autoindent                      " keep indentation from previous line
     set expandtab                       " use spaces in place of tab characters
-    set shiftwidth=4                    " number of spaces to use for autoindenting
-    set softtabstop=4                   " number of spaces to use when pressing <tab> and pressing backspace
-    set tabstop=4                       " the width of a tab in spaces
+    set shiftwidth=2                    " number of spaces to use for autoindenting
+    set softtabstop=2                   " number of spaces to use when pressing <tab> and pressing backspace
+    set tabstop=2                       " the width of a tab in spaces
     set smartindent                     " automatically inserts indentation in some cases
     set wrap                            " wrap visually, rather than changing text in the buffer
 
@@ -162,19 +163,17 @@
 
 " Filetype specific {
 
+    " Crontab
+    au FileType crontab set nobackup nowritebackup
+
     " GLSL
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
-    
-    " Jade, Stylus
-    au BufRead,BufNewFile *.jade,*.styl setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " JavaScript
     au BufRead,BufNewFile *.json,*.ejs setf javascript 
-    au FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " Ruby
     au BufRead,BufNewFile *.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
-    au FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2 
 
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache 
@@ -230,8 +229,11 @@
     " Close buffer but don't close split
     nmap <leader>d :b#<bar>bd#<CR>
 
+    " Vimgrep and place cursor in correct position
+    nnoremap <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+
     " Toggle display of invisible / non-printable characters
-    nnoremap <leader>l :set list!<CR>
+    nnoremap <silent> <leader>i :set list!<CR>
 
     " Preserve indentation while pasting text from the OS X clipboard
     noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
@@ -274,7 +276,9 @@
     endif
 " }
 
-command Vhosts e /private/etc/apache2/extra/httpd-vhosts.conf
+
+" TODO: move this into separate zencoding file at plugins/settings/
+let g:user_zen_expandabbr_key = '<c-e>'
 
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
