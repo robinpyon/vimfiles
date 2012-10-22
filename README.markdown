@@ -8,13 +8,14 @@ Clone the repo
 
     git clone git://github.com/robinpyon/vimfiles
 
-Create a symlink to .vimrc
+Create symlinks
 
-    ln -s ~/vimfiles/.vimrc ~/.vimrc
+    ln -s ~/vimfiles/ ~/.vim
+    ln -s ~/vimfiles/vimrc ~/.vimrc
 
 Install all vim plugins managed by vundle
 
-	open vim
+	(open vim)
 	:BundleInstall
 	
 ### Environment
