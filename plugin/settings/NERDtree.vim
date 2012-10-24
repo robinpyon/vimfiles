@@ -1,7 +1,7 @@
 " Change the current working directory to NERDTree root
 let NERDTreeChDirMode=2
 
-let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git[[dir]]', '\.hg', '\.svn', '\.bzr']
 
 " Hide invisible files on launch
 let NERDTreeShowHidden=0
