@@ -17,6 +17,7 @@
     " }
 
     " Setup Bundle Support {
+        filetype off                " required
         set rtp+=~/.vim/bundle/vundle/
         call vundle#rc()
     " }
@@ -25,8 +26,9 @@
 
 " Bundles {
 
-    " Deps
     Bundle 'gmarik/vundle'              
+
+    " Deps
     Bundle 'MarcWeber/vim-addon-mw-utils'
     Bundle 'tomtom/tlib_vim'
 
@@ -49,11 +51,11 @@
     Bundle 'ervandew/supertab'
     " Bundle 'majutsushi/tagbar'
     Bundle 'jiangmiao/auto-pairs'
+    Bundle 'editorconfig/editorconfig-vim'
     Bundle 'scrooloose/syntastic'
     Bundle 'Shougo/neocomplcache'
     Bundle 'SirVer/ultisnips'
     Bundle 'tpope/vim-fugitive'
-    " Bundle 'tpope/vim-ragtag'
     Bundle 'tomtom/tcomment_vim'
 
     " C based (C / C++ / Objective-C / Objective-C++)
@@ -63,6 +65,9 @@
     " HTML / CSS
     Bundle 'mattn/zencoding-vim'
     " Bundle 'tpope/vim-haml'
+
+    " CoffeeScript
+    Bundle 'kchmck/vim-coffee-script'
 
     " Jade 
     " Syntax higlighting + indentation
@@ -74,11 +79,12 @@
     Bundle 'taxilian/vim-web-indent'
 
     " Ruby
+    Bundle 'tpope/vim-endwise'
     " Bundle 'pgr0ss/vimux-ruby-test'
     " Bundle 'tpope/vim-bundler'
-    " NOTE: endwise conflics with vim-smartinput
-    " Bundle 'tpope/vim-endwise'
-    " Bundle 'tpope/vim-rails'
+    Bundle 'tpope/vim-rails'
+    " Bundle 'vim-ruby/vim-ruby'
+    Bundle 'tpope/vim-ragtag'
 
     " Stylus syntax highlighting
     Bundle 'wavded/vim-stylus'
@@ -173,7 +179,7 @@
     au BufRead,BufNewFile *.json,*.ejs setf javascript 
 
     " Ruby
-    au BufRead,BufNewFile *.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
+    au BufEnter,BufRead,BufNewFile *.json.rabl,*.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
 
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache 
@@ -206,13 +212,6 @@
         execute "set <xRight>=\e[1;*C"
         execute "set <xLeft>=\e[1;*D"
     endif
-
-    " Stupid shift key fixes
-    " cmap W w
-    " cmap WQ wq
-    " cmap wQ wq
-    " cmap Q q
-    " cmap Tabe tabe
 
     " Yank from the cursor to the end of the line, to be consistent with C and D.
     nnoremap Y y$
@@ -249,6 +248,11 @@
     noremap <leader>y "*y
     noremap <leader>yy "*Y
 
+    " Tab navigation
+    noremap <C-j> :tabp<CR>
+    noremap <C-k> :tabn<CR>
+    noremap <C-c> :tabclose<CR>
+
     " Clearing highlighted search
     nmap <silent> <leader>/ :nohlsearch<CR>
 
@@ -262,6 +266,9 @@
     vnoremap <Tab> >gv
     vnoremap <S-Tab> <gv
 
+    " Open current file in Marked and redraw screen
+    command! Marked silent !open -a "Marked.app" "%:p"
+    nmap <silent> <leader>m :Marked<CR>\|:redraw!<CR>
 
 " }
 
