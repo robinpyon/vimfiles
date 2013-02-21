@@ -98,13 +98,17 @@
     set background=dark                 " assume a dark background
     filetype plugin indent on           " automatically detect file types
     syntax on                           " Enable syntax highlighting
-    set synmaxcol=2048                   " Limit highlighting to to 120 cols so vim doesn't choke on minified files
+    set synmaxcol=400                   " Limit highlighting so vim doesn't choke on minified files
     set encoding=utf-8
     set history=1000
     set mouse=a                         " enable full mouse support
     set noerrorbells                    " disable error bells
     set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
     set shm+=I                          " Hide startup message
+
+    set ttyfast
+    " set ttyscroll=3
+    " set lazyredraw
 
     " Source .vimrc when saved and reload powerline
     " au BufWritePost .vimrc source ~/.vimrc
@@ -129,7 +133,7 @@
     set clipboard=unnamed               " (MacVim) use system clipboard
     set colorcolumn=85
     set cpoptions+=$
-    set cursorline
+    set cursorline                      " highlight current line (can be very slow)
     set diffopt=vertical                " default vimdiff to vertical split
     set foldopen+=search,undo           " open folds on specific commands
     set formatoptions+=1
@@ -193,7 +197,7 @@
 
     let mapleader = ","                 " change the mapleader from \ to ,
 
-    nnoremap ; :
+    nnoremap <space> :
 
     " Easy navigation between windows
     nnoremap <C-h> <C-w>h 
@@ -282,7 +286,6 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }
-
 
 " TODO: move this into separate zencoding file at plugins/settings/
 let g:user_zen_expandabbr_key = '<c-e>'
