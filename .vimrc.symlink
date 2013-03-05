@@ -112,7 +112,10 @@
 
     " Source .vimrc when saved and reload powerline
     " au BufWritePost .vimrc source ~/.vimrc
-    au BufWritePost .vimrc call Pl#Load()
+    if has("autocmd")
+      au BufWritePost .vimrc.symlink source $MYVIMRC 
+      call Pl#Load()
+    endif
 
     " Could use * rather than *.*, but I prefer to leave .files unsaved (This conflicts with rails.vim))
     " au BufWinLeave *.* silent! mkview       " Make vim save view (state) (folds, cursor, etc)
