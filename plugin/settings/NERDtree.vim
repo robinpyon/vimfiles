@@ -11,5 +11,5 @@ let NERDTreeShowHidden=0
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
 
-map <F3> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+" map <F3> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
 nmap <leader>nt :NERDTreeFind<CR>

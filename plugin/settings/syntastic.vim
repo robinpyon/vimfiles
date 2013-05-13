@@ -2,10 +2,7 @@
 let g:syntastic_enable_signs=1
 
 " automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
+let g:syntastic_auto_jump=1
 
-" don't show the error list automatically
-let g:syntastic_auto_loc_list=0
-
-"don't care about warnings
-let g:syntastic_quiet_warnings=0
+" Show the error list automatically
+let g:syntastic_auto_loc_list=1

@@ -37,8 +37,9 @@
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
-    Bundle 'milkypostman/vim-togglelist'
+    " Bundle 'milkypostman/vim-togglelist'
     Bundle 'scrooloose/nerdtree'
+    Bundle 'jistr/vim-nerdtree-tabs'
     Bundle 'skwp/vim-colors-solarized'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
@@ -74,7 +75,6 @@
     Bundle 'digitaltoad/vim-jade'   
 
     " JavaScript
-    Bundle 'walm/jshint.vim'
     Bundle 'vim-scripts/vim-json-bundle'
     Bundle 'taxilian/vim-web-indent'
 
@@ -91,6 +91,7 @@
 
     " Misc
     Bundle 'tpope/vim-markdown'
+    " Bundle 'kbarrette/mediummode'
 
 " }
 
@@ -112,10 +113,12 @@
 
     " Source .vimrc when saved and reload powerline
     " au BufWritePost .vimrc source ~/.vimrc
-    if has("autocmd")
-      au BufWritePost .vimrc.symlink source $MYVIMRC 
-      call Pl#Load()
-    endif
+    augroup myvimrchooks
+      au!
+      au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
+      " TODO: call Pl#Load() as well
+      " call Pl#Load()
+    augroup END
 
     " Could use * rather than *.*, but I prefer to leave .files unsaved (This conflicts with rails.vim))
     " au BufWinLeave *.* silent! mkview       " Make vim save view (state) (folds, cursor, etc)
@@ -208,6 +211,21 @@
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
 
+    " Tab navigation
+    nnoremap <C-1> 1gt
+    nnoremap <C-2> 2gt
+    nnoremap <C-3> 3gt
+    nnoremap <C-4> 4gt
+    nnoremap <C-5> 5gt
+    nnoremap <C-6> 6gt
+    nnoremap <C-7> 7gt
+    nnoremap <C-8> 8gt
+    nnoremap <C-9> 9gt
+    nnoremap <C-0> :tablast<CR>
+    nnoremap <C-j> :tabp<CR>
+    nnoremap <C-k> :tabn<CR>
+    nnoremap <C-c> :tabclose<CR>
+
     " Wrapped lines goes down/up to next row, rather than next line in file.
     nnoremap j gj
     nnoremap k gk
@@ -254,11 +272,6 @@
     " Yank text to the OS X clipboard
     noremap <leader>y "*y
     noremap <leader>yy "*Y
-
-    " Tab navigation
-    noremap <C-j> :tabp<CR>
-    noremap <C-k> :tabn<CR>
-    noremap <C-c> :tabclose<CR>
 
     " Clearing highlighted search
     nmap <silent> <leader>/ :nohlsearch<CR>
