@@ -42,6 +42,7 @@
     Bundle 'scrooloose/nerdtree'
     Bundle 'jistr/vim-nerdtree-tabs'
     Bundle 'skwp/vim-colors-solarized'
+    Bundle 'terryma/vim-multiple-cursors'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-surround'
