@@ -38,6 +38,7 @@
     Bundle 'Lokaltog/vim-easymotion'
     Bundle 'Lokaltog/vim-powerline'
     " Bundle 'milkypostman/vim-togglelist'
+    Bundle 'mileszs/ack.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'jistr/vim-nerdtree-tabs'
     Bundle 'skwp/vim-colors-solarized'
