@@ -60,6 +60,19 @@ function(${2}){
 });
 endsnippet
 
+snippet def "require.js define block (with backbone.js dependencies)"
+define([
+	'jquery',
+	'underscore',
+	'backbone'
+], 
+function($, _, Backbone){
+  return {
+		${1}
+  };
+});
+endsnippet
+
 snippet req "require.js block"
 require([${1}], function(${2}){
 });
@@ -89,6 +102,24 @@ endsnippet
 snippet fnn "Named function declaration" w
 function ${1}(${2}) { 
     ${3} 
+}
+endsnippet
+
+snippet for "for (i < n) {...}"
+for (var ${2:i}=0; $2 < ${1:5}; $2++) {
+	${3}
+}
+endsnippet
+
+snippet for "for (i < n.length) {...}"
+for (var ${2:i}=0; $2 < ${1:Things}.length; $2++) {
+	${3:$1[$2]}${VISUAL}$0
+}
+endsnippet
+
+snippet for "for (...) {...} (faster)"
+for (var ${2:i} = ${1:Things}.length - 1; $2 >= 0; $2--) {
+	${3:$1[$2]}${VISUAL}$0
 }
 endsnippet
 

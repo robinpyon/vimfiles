@@ -42,6 +42,7 @@
     Bundle 'scrooloose/nerdtree'
     Bundle 'jistr/vim-nerdtree-tabs'
     Bundle 'skwp/vim-colors-solarized'
+    Bundle 'szw/vim-tags'
     Bundle 'terryma/vim-multiple-cursors'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
@@ -52,9 +53,9 @@
 
     " General Programming
     Bundle 'ervandew/supertab'
-    " Bundle 'majutsushi/tagbar'
-    Bundle 'jiangmiao/auto-pairs'
     Bundle 'editorconfig/editorconfig-vim'
+    Bundle 'jiangmiao/auto-pairs'
+    Bundle 'majutsushi/tagbar'
     Bundle 'scrooloose/syntastic'
     Bundle 'Shougo/neocomplcache'
     Bundle 'SirVer/ultisnips'
@@ -101,7 +102,7 @@
     set background=dark                 " assume a dark background
     filetype plugin indent on           " automatically detect file types
     syntax on                           " Enable syntax highlighting
-    set synmaxcol=400                   " Limit highlighting so vim doesn't choke on minified files
+    set synmaxcol=200                   " Limit highlighting so vim doesn't choke on minified files
     set encoding=utf-8
     set history=1000
     set mouse=a                         " enable full mouse support
@@ -141,7 +142,7 @@
     set clipboard=unnamed               " (MacVim) use system clipboard
     set colorcolumn=85
     set cpoptions+=$
-    set cursorline                      " highlight current line (can be very slow)
+    " set cursorline                    " highlight current line (can be very slow)
     set diffopt=vertical                " default vimdiff to vertical split
     set foldopen+=search,undo           " open folds on specific commands
     set formatoptions+=1
