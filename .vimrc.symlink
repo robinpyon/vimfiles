@@ -62,6 +62,9 @@
     Bundle 'tpope/vim-fugitive'
     Bundle 'tomtom/tcomment_vim'
 
+    " Arduino
+    Bundle 'tclem/vim-arduino'
+
     " C based (C / C++ / Objective-C / Objective-C++)
     " Bundle 'Rip-Rip/clang_complete'
     " Bundle 'vim-scripts/a.vim'
@@ -181,6 +184,9 @@
 " }
 
 " Filetype specific {
+
+    " Arduino
+    au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
 
     " Crontab
     au FileType crontab set nobackup nowritebackup
