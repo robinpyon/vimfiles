@@ -34,9 +34,9 @@
 
     " General 
     " Bundle 'benmills/vimux'
+    Bundle 'bling/vim-airline'
     Bundle 'kien/ctrlp.vim'
     Bundle 'Lokaltog/vim-easymotion'
-    Bundle 'Lokaltog/vim-powerline'
     " Bundle 'milkypostman/vim-togglelist'
     Bundle 'mileszs/ack.vim'
     Bundle 'scrooloose/nerdtree'
@@ -117,13 +117,11 @@
     " set ttyscroll=3
     " set lazyredraw
 
-    " Source .vimrc when saved and reload powerline
+    " Source .vimrc when saved
     " au BufWritePost .vimrc source ~/.vimrc
     augroup myvimrchooks
       au!
       au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
-      " TODO: call Pl#Load() as well
-      " call Pl#Load()
     augroup END
 
     " Could use * rather than *.*, but I prefer to leave .files unsaved (This conflicts with rails.vim))
@@ -306,7 +304,6 @@
         set guioptions-=T           " remove the toolbar
         set lines=40                " 40 lines of text instead of 24,
         set linespace=2
-        set guifont=Inconsolata\ for\ Powerline:h16
     else
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
