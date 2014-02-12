@@ -7,4 +7,4 @@ let g:ctrlp_max_height = 8
 let g:ctrlp_switch_buffer = 0                   " don't switch to open buffer
 let g:ctrlp_working_path_mode = 0               " don't manage working directory
 
-nmap ; :CtrlPBuffer<CR>
+" nmap ; :CtrlPBuffer<CR>
