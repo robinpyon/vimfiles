@@ -10,7 +10,7 @@
 " }
 
 " Environment {
-    
+
     " Basics {
         set nocompatible            " disable vi compatibility, must be a first line
         set background=dark         " assume a dark background
@@ -21,36 +21,38 @@
         set rtp+=~/.vim/bundle/vundle/
         call vundle#rc()
     " }
-    
+
 " }
 
 " Bundles {
 
-    Bundle 'gmarik/vundle'              
+    Bundle 'gmarik/vundle'
 
     " Deps
     Bundle 'MarcWeber/vim-addon-mw-utils'
     Bundle 'tomtom/tlib_vim'
 
-    " General 
+    " General
     " Bundle 'benmills/vimux'
     Bundle 'bling/vim-airline'
     Bundle 'jistr/vim-nerdtree-tabs'
     Bundle 'justinmk/vim-sneak'
     Bundle 'kien/ctrlp.vim'
-    Bundle 'Lokaltog/vim-easymotion'
-    " Bundle 'milkypostman/vim-togglelist'
+    " Bundle 'Lokaltog/vim-easymotion'
+    " " Bundle 'milkypostman/vim-togglelist'
     Bundle 'mhinz/vim-signify'
     Bundle 'mileszs/ack.vim'
+    " Bundle 'rking/ag.vim'
     Bundle 'scrooloose/nerdtree'
     Bundle 'skwp/vim-colors-solarized'
-    Bundle 'szw/vim-tags'
-    Bundle 'terryma/vim-multiple-cursors'
+    " Bundle 'szw/vim-tags'
+    " Bundle 'terryma/vim-multiple-cursors'
+    Bundle 'tommcdo/vim-exchange'
     Bundle 'tpope/vim-eunuch'
     Bundle 'tpope/vim-repeat'
     Bundle 'tpope/vim-surround'
     Bundle 'tpope/vim-unimpaired'
-    Bundle 'vim-scripts/IndexedSearch'
+    " Bundle 'vim-scripts/IndexedSearch'
     " Bundle 'vim-scripts/Toggle'
 
     " General Programming
@@ -78,9 +80,9 @@
     " CoffeeScript
     Bundle 'kchmck/vim-coffee-script'
 
-    " Jade 
+    " Jade
     " Syntax higlighting + indentation
-    " Bundle 'digitaltoad/vim-jade'   
+    " Bundle 'digitaltoad/vim-jade'
 
     " JavaScript
     Bundle 'vim-scripts/vim-json-bundle'
@@ -104,18 +106,17 @@
 " }
 
 " General {
-    set background=dark                 " assume a dark background
     filetype plugin indent on           " automatically detect file types
-    syntax on                           " Enable syntax highlighting
     set encoding=utf-8
     set history=1000
     set mouse=a                         " enable full mouse support
     set noerrorbells                    " disable error bells
-    set vb t_vb=                        " Disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
-    set shm+=I                          " Hide startup message
-    set synmaxcol=200                   " Limit highlighting so vim doesn't choke on minified files
+    set vb t_vb=                        " disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
+    set shm+=I                          " hide startup message
+    set synmaxcol=200                   " limit highlighting so vim doesn't choke on minified files
 
-    " set grepprg=ack                     " Use grep over ack
+    set foldmethod=indent
+    " set grepprg=ack                     " Use ack instead of grep
 
     " set ttyfast
     " set ttyscroll=3
@@ -139,53 +140,74 @@
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \   exe "normal g`\"" |
         \ endif
-
 " }
 
 " Vim UI {
-    set backspace=indent,eol,start      " ensure backspace works like in other programs
-    set clipboard=unnamed               " (MacVim) use system clipboard
-    set colorcolumn=85
-    set cpoptions+=$
-    " set cursorline                    " highlight current line (can be very slow)
-    set diffopt=vertical                " default vimdiff to vertical split
-    set foldopen+=search,undo           " open folds on specific commands
-    set formatoptions+=1
-    set hlsearch                        " highlight search items
-    set ignorecase                      " case insensitive search if search is all lowercase
-    set incsearch                       " show 'best match so far' as search strings are typed
-    set laststatus=2                    " always show statusbar
-    set linebreak                       " only wrap at word boundaries
-    set listchars=tab:▸\ ,eol:¬         " set custom characters for non printable elements
-    " set number                        " show line numbers
-    set nolist                          " hide hidden characters
-    set smartcase                       " case sensitive search if search contains uppercase characters
-    set splitright                      " new horizontal splits on the right
-    set splitbelow                      " new vertical splits on the bottom
-    set textwidth=0
-    set wildmenu
-    set wildignore=*~,.git,tmp,*.log
-    set wildmode=list:longest,full
 
-    " Change cursor type when entering and exiting insert mode
-    if has('cursorshape')
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
+  " Colors
+  syntax on                           " enable syntax highlighting
+  set background=dark                 " assume a dark background
+
+  " Folding
+  set foldenable                      " enable folding
+  set foldlevelstart=10               " open most folds by default
+  " set foldmethod=indent
+  set foldnestmax=3                   " limit nested fold levels
+  set foldopen+=search,undo           " open folds on specific commands
+
+  " Indenting + Word wrap
+  set autoindent                      " keep indentation from previous line
+  set linebreak                       " only wrap at word boundaries
+  set shiftwidth=2                    " number of spaces to use for autoindenting
+  set smartindent                     " automatically inserts indentation in some cases
+  set wrap                            " wrap visually, rather than changing text in the buffer
+
+  " Search
+  set hlsearch                        " highlight search items
+  set ignorecase                      " case insensitive search if search is all lowercase
+  set incsearch                       " show 'best match so far' as search strings are typed
+  set smartcase                       " case sensitive search if search contains uppercase characters
+
+  " Spaces & Tabs
+  set expandtab                       " use spaces in place of tab characters
+  set softtabstop=2                   " number of spaces to use when pressing <tab> and pressing backspace
+  set tabstop=2                       " the width of a tab in spaces
+
+  " Splits
+  set splitright                      " new horizontal splits on the right
+  set splitbelow                      " new vertical splits on the bottom
+
+  " TODO: organize
+  set backspace=indent,eol,start      " ensure backspace works like in other programs
+  set clipboard=unnamed               " use system clipboard as default register
+  set colorcolumn=85                  " draw vertical colored column"
+  set cpoptions+=$
+  " set cursorline                    " highlight current line (can be very slow)
+  set diffopt=vertical                " default vimdiff to vertical split
+  set formatoptions+=1
+  set laststatus=2                    " always show statusbar
+  set listchars=tab:▸\ ,eol:¬         " set custom characters for non printable elements
+  set number                          " show line numbers
+  set nolist                          " hide hidden characters
+  set showmatch                       " highlight matching parentheses
+  set textwidth=0
+  set wildmenu                        " show autocomplete matches in a cycle-able menu
+  set wildignore=*~,.git,tmp,*.log
+  set wildmode=list:longest,full
+
+  " Change cursor type when entering and exiting insert mode
+  if has('cursorshape')
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
 " }
 
-" Formatting {
-    set autoindent                      " keep indentation from previous line
-    set expandtab                       " use spaces in place of tab characters
-    set shiftwidth=2                    " number of spaces to use for autoindenting
-    set softtabstop=2                   " number of spaces to use when pressing <tab> and pressing backspace
-    set tabstop=2                       " the width of a tab in spaces
-    set smartindent                     " automatically inserts indentation in some cases
-    set wrap                            " wrap visually, rather than changing text in the buffer
+" Autogroups {
 
-" }
+  augroup configgroup
 
-" Filetype specific {
+    " Clear autocommands for current group
+    autocmd!
 
     " Arduino
     au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
@@ -197,17 +219,20 @@
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
 
     " JavaScript
-    au BufRead,BufNewFile *.json,*.ejs setf javascript 
+    au BufRead,BufNewFile *.json,*.ejs setf javascript
 
     " Ruby
+    " au BufEnter,BufRead,BufNewFile *.erb setf html.javascript.ruby
     au BufEnter,BufRead,BufNewFile *.json.rabl,*.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
 
     " .htaccess
-    au BufNewFile,BufRead .htaccess setf apache 
+    au BufNewFile,BufRead .htaccess setf apache
 
-    " On save: remove trailing whitespaces and ^M chars 
-    au FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))   
-    
+    " On save: remove trailing whitespaces and ^M chars
+    au FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+  augroup END
+
 " }
 
 " Key mappings {
@@ -217,7 +242,7 @@
     nnoremap <space> :
 
     " Easy navigation between windows
-    nnoremap <C-h> <C-w>h 
+    nnoremap <C-h> <C-w>h
     nnoremap <C-j> <C-w>j
     nnoremap <C-k> <C-w>k
     nnoremap <C-l> <C-w>l
@@ -303,9 +328,21 @@
     command! Marked silent !open -a "Marked.app" "%:p"
     nmap <silent> <leader>m :Marked<CR>\|:redraw!<CR>
 
+    " Populate arguments with results from quickfixA list
+    " Source: http://stackoverflow.com/a/5686810
+    command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+    function! QuickfixFilenames()
+      " Building a hash ensures we get each buffer only once
+      let buffer_numbers = {}
+      for quickfix_item in getqflist()
+        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+      endfor
+      return join(values(buffer_numbers))
+    endfunction
+
 " }
 
-" GUI settings {
+" GUI (MacVim) settings {
    if has('gui_running')
         set guioptions-=T           " remove the toolbar
         set lines=40                " 40 lines of text instead of 24,
@@ -314,9 +351,6 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }
-
-" TODO: move this into separate zencoding file at plugins/settings/
-let g:user_zen_expandabbr_key = '<c-e>'
 
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
