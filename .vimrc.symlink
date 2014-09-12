@@ -36,6 +36,7 @@
     " Bundle 'benmills/vimux'
     Bundle 'bling/vim-airline'
     Bundle 'jistr/vim-nerdtree-tabs'
+    Bundle 'justinmk/vim-gtfo'
     Bundle 'justinmk/vim-sneak'
     Bundle 'kien/ctrlp.vim'
     " Bundle 'Lokaltog/vim-easymotion'
@@ -58,6 +59,7 @@
     " General Programming
     Bundle 'ervandew/supertab'
     Bundle 'editorconfig/editorconfig-vim'
+    Bundle 'jaxbot/browserlink.vim'
     Bundle 'jiangmiao/auto-pairs'
     Bundle 'majutsushi/tagbar'
     Bundle 'scrooloose/syntastic'
@@ -65,6 +67,9 @@
     Bundle 'SirVer/ultisnips'
     Bundle 'tpope/vim-fugitive'
     Bundle 'tomtom/tcomment_vim'
+
+    " Ctrl-P specific
+    Bundle 'FelikZ/ctrlp-py-matcher'
 
     " Arduino
     Bundle 'tclem/vim-arduino'
@@ -74,11 +79,9 @@
     " Bundle 'vim-scripts/a.vim'
 
     " HTML / CSS
+    Bundle 'chrisbra/Colorizer'
     Bundle 'mattn/emmet-vim'
     " Bundle 'tpope/vim-haml'
-
-    " CoffeeScript
-    Bundle 'kchmck/vim-coffee-script'
 
     " Jade
     " Syntax higlighting + indentation
@@ -87,6 +90,12 @@
     " JavaScript
     Bundle 'vim-scripts/vim-json-bundle'
     Bundle 'taxilian/vim-web-indent'
+
+    " JavaScript: CoffeeScript
+    Bundle 'kchmck/vim-coffee-script'
+    
+    " Eco support
+    Bundle 'AndrewRadev/vim-eco'
 
     " Ruby
     Bundle 'tpope/vim-endwise'
@@ -98,6 +107,9 @@
 
     " Stylus syntax highlighting
     Bundle 'wavded/vim-stylus'
+
+    " Templating: Handlebars / Mustache
+    Bundle 'mustache/vim-mustache-handlebars'
 
     " Misc
     Bundle 'tpope/vim-markdown'
@@ -217,6 +229,12 @@
 
     " GLSL
     au BufNewFile,BufRead *.frag,*.vert,*.fp,*.vp,*.glsl,*.vshader,*.fshader setf glsl
+
+    " HAML
+    au BufRead,BufNewFile *.hamlc set ft=haml
+
+    " HTML
+    au BufRead,BufNewFile *.hbs setf html
 
     " JavaScript
     au BufRead,BufNewFile *.json,*.ejs setf javascript
@@ -351,6 +369,10 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }
+
+" TODO: move into separate file under plugin/settings
+let g:colorizer_auto_filetype = 'css,html,sass,scss'
+let g:colorizer_skip_comments = 1
 
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
