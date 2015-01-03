@@ -16,6 +16,8 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
   \ --ignore .dat
   \ --ignore .git
   \ --ignore .svn
+  \ --ignore .swo
+  \ --ignore .swp
   \ --ignore .hg
   \ --ignore .DS_Store
   \ --ignore "/.git"
