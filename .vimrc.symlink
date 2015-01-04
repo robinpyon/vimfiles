@@ -78,7 +78,8 @@
     " Plugin 'jaxbot/browserlink.vim'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'scrooloose/syntastic'
-    Plugin 'Shougo/neocomplcache'
+    " - Keyword completion
+    Plugin 'Shougo/neocomplete'
     Plugin 'SirVer/ultisnips'
     Plugin 'tpope/vim-fugitive'
     Plugin 'tomtom/tcomment_vim'
@@ -367,6 +368,10 @@
     " Open current file in Marked and redraw screen
     command! Marked silent !open -a "Marked.app" "%:p"
     nmap <silent> <leader>m :Marked<CR>\|:redraw!<CR>
+
+    " Move up and down in autocomplete with <c-j> and <c-k>
+    inoremap <expr> <c-j> ("\<C-n>")
+    inoremap <expr> <c-k> ("\<C-p>")
 
     " Populate arguments with results from quickfixA list
     " Source: http://stackoverflow.com/a/5686810
