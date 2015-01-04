@@ -42,7 +42,7 @@
     Plugin 'mileszs/ack.vim'
     Plugin 'moll/vim-bbye'
     " Plugin 'rking/ag.vim'
-    Plugin 'skwp/vim-colors-solarized'
+    Plugin 'chriskempson/base16-vim'
     " Plugin 'terryma/vim-multiple-cursors'
     Plugin 'tpope/vim-eunuch'
     Plugin 'tpope/vim-repeat'
@@ -96,9 +96,9 @@
     Plugin 'tikhomirov/vim-glsl'
 
     " HTML / CSS
-    " Plugin 'chrisbra/Colorizer'
+    " - Highlight color names and codes
+    Plugin 'chrisbra/Colorizer'
     Plugin 'mattn/emmet-vim'
-    " Plugin 'tpope/vim-haml'
 
     " Jade
     " Syntax higlighting + indentation
@@ -391,10 +391,6 @@
         "set term=builtin_ansi       " Make arrow and other keys work
     endif
 " }
-
-" TODO: move into separate file under plugin/settings
-let g:colorizer_auto_filetype = 'css,html,sass,scss'
-let g:colorizer_skip_comments = 1
 
 " TODO: use interactive shell when trying to run Plask.app
 " set shell=/bin/bash\ -li            " enable interactive shell
