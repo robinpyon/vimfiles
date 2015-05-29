@@ -31,6 +31,8 @@
     " Deps
     Plugin 'MarcWeber/vim-addon-mw-utils'
     Plugin 'tomtom/tlib_vim'
+    " - Required for vimfiler
+    Plugin 'Shougo/unite.vim'
 
     " General
     Plugin 'bling/vim-airline'
@@ -55,9 +57,12 @@
     Plugin 'justinmk/vim-sneak'
     Plugin 'tommcdo/vim-exchange'
 
-    " NerdTree
+
+    " File explorer
+    " - VimFiler
+    " Plugin 'Shougo/vimfiler.vim'
+    " - NerdTree
     Plugin 'scrooloose/nerdtree'
-    " Plugin 'jistr/vim-nerdtree-tabs'
 
     " Dash
     Plugin 'rizzatti/dash.vim'
@@ -98,12 +103,15 @@
 
     " HTML / CSS
     " - Highlight color names and codes
-    Plugin 'chrisbra/Colorizer'
+    " Plugin 'chrisbra/Colorizer'
     Plugin 'mattn/emmet-vim'
 
     " Jade
     " Syntax higlighting + indentation
     " Plugin 'digitaltoad/vim-jade'
+
+    " JSX
+    Plugin 'mxw/vim-jsx'
 
     " JavaScript
     Plugin 'vim-scripts/vim-json-bundle'
@@ -117,7 +125,6 @@
 
     " Ruby
     Plugin 'tpope/vim-endwise'
-    " Plugin 'pgr0ss/vimux-ruby-test'
     " Plugin 'tpope/vim-bundler'
     Plugin 'tpope/vim-rails'
     " Plugin 'vim-ruby/vim-ruby'
@@ -372,6 +379,12 @@
     " Move up and down in autocomplete with <c-j> and <c-k>
     inoremap <expr> <c-j> ("\<C-n>")
     inoremap <expr> <c-k> ("\<C-p>")
+
+    map <silent> <F5> :if &background == 'light'<Bar>
+          \set background=dark<Bar>
+          \else <Bar>
+          \set background=light <Bar>
+          \endif<cr>
 
     " Populate arguments with results from quickfixA list
     " Source: http://stackoverflow.com/a/5686810

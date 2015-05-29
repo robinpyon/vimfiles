@@ -1,41 +1,37 @@
 # Backbone helpers
+
 snippet bbc "Backbone Collection" w
 Backbone.Collection.extend({
-  ${1} 
+	${1} 
 });
 endsnippet
 
 snippet bbm "Backbone Model" w
 Backbone.Model.extend({
-  ${1} 
+	${1} 
 });
 endsnippet
 
 snippet bbr "Backbone Router" w
 Backbone.Router.extend({
-  ${1} 
+	${1} 
 });
 endsnippet
 
 snippet bbv "Backbone View" w
 Backbone.View.extend({
-  ${1} 
+	${1} 
 });
 endsnippet
 
 snippet init "initialize" w
 initialize: function() {
-  ${1}
-}
-endsnippet
-
-snippet events "events" w
-events: function() {
-  ${1}
+	${1}
 }
 endsnippet
 
 # Node
+
 snippet writeHead "Write header" w 
 writeHead(${1:200}, {'Content-Type': ${2:'text/plain'}});
 endsnippet
@@ -44,19 +40,19 @@ endsnippet
 
 snippet def "require.js define block (no dependencies)"
 define(function(){
-  ${1}
-  return {
-  };
+	${1}
+	return {
+	};
 });
 endsnippet
 
 snippet def "require.js define block (with dependencies)"
 define([
-  ${1}
+	${1}
 ], 
 function(${2}){
-  return {
-  };
+	return {
+	};
 });
 endsnippet
 
@@ -67,9 +63,9 @@ define([
 	'backbone'
 ], 
 function($, _, Backbone){
-  return {
+	return {
 		${1}
-  };
+	};
 });
 endsnippet
 
@@ -80,11 +76,16 @@ endsnippet
 
 snippet reqconf "require.js config block"
 require.config({
-  ${1}
+	${1}
 });
 endsnippet
 
 # General
+
+snippet bfn "Anonymous function declaration (wrapped with bind)" w
+(function(${1}) { ${2} }).bind(this)
+endsnippet
+
 snippet ci "Console.info()" w
 console.info(${1});
 endsnippet
@@ -95,8 +96,16 @@ endsnippet
 
 snippet efn "Anonymous function expression" w
 ${1:var} ${2:fn}: function() { 
-  ${3} 
+	${3} 
 }
+endsnippet
+
+snippet doc "JSDoc" w
+/**
+ * ${1}
+ * @constructor
+ * @param {${2}} ${3} - ${4}
+ */
 endsnippet
 
 snippet fn "Anonymous function declaration" w
@@ -105,7 +114,7 @@ endsnippet
 
 snippet fnn "Named function declaration" w
 function ${1}(${2}) { 
-    ${3} 
+	${3} 
 }
 endsnippet
 
@@ -129,9 +138,9 @@ endsnippet
 
 snippet pkg "Template package.json file" b
 {
-    "name": "${1:...}",
-    "version": "${2:0.0.1}",
-    "private": "true"
+	"name": "${1:...}",
+	"version": "${2:0.0.1}",
+	"private": "true"
 }
 endsnippet
 
