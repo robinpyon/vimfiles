@@ -48,6 +48,7 @@
     " Plugin 'terryma/vim-multiple-cursors'
     Plugin 'tpope/vim-eunuch'
     Plugin 'tpope/vim-repeat'
+    Plugin 'kshenoy/vim-signature'
     Plugin 'tpope/vim-surround'
     Plugin 'tpope/vim-unimpaired'
     " Plugin 'vim-scripts/IndexedSearch'
@@ -60,9 +61,9 @@
 
     " File explorer
     " - VimFiler
-    " Plugin 'Shougo/vimfiler.vim'
+    Plugin 'Shougo/vimfiler.vim'
     " - NerdTree
-    Plugin 'scrooloose/nerdtree'
+    " Plugin 'scrooloose/nerdtree'
 
     " Dash
     Plugin 'rizzatti/dash.vim'
@@ -97,6 +98,12 @@
     " C based (C / C++ / Objective-C / Objective-C++)
     " Plugin 'Rip-Rip/clang_complete'
     " Plugin 'vim-scripts/a.vim'
+
+    " CSS - LESS
+    Plugin 'groenewege/vim-less'
+
+    " Eco support
+    Plugin 'AndrewRadev/vim-eco'
     
     " GLSL
     Plugin 'tikhomirov/vim-glsl'
@@ -115,14 +122,13 @@
 
     " JavaScript
     Plugin 'vim-scripts/vim-json-bundle'
-    Plugin 'taxilian/vim-web-indent'
+    " Plugin 'taxilian/vim-web-indent'
+    Plugin 'pangloss/vim-javascript'
 
     " JavaScript - CoffeeScript
     Plugin 'kchmck/vim-coffee-script'
-    
-    " Eco support
-    Plugin 'AndrewRadev/vim-eco'
 
+    
     " Ruby
     Plugin 'tpope/vim-endwise'
     " Plugin 'tpope/vim-bundler'
@@ -130,7 +136,7 @@
     " Plugin 'vim-ruby/vim-ruby'
     Plugin 'tpope/vim-ragtag'
 
-    " Stylus syntax highlighting
+    " Stylus
     Plugin 'wavded/vim-stylus'
 
     " Templating - Handlebars / Mustache
@@ -219,7 +225,7 @@
   set clipboard=unnamed               " use system clipboard as default register
   set colorcolumn=85                  " draw vertical colored column"
   set cpoptions+=$
-  " set cursorline                    " highlight current line (can be very slow)
+  set cursorline                      " highlight current line (can be very slow)
   set diffopt=vertical                " default vimdiff to vertical split
   set formatoptions+=1
   set laststatus=2                    " always show statusbar
@@ -397,6 +403,16 @@
       endfor
       return join(values(buffer_numbers))
     endfunction
+
+    function! ToggleErrors()
+      if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+        " No location/quickfix list shown, open syntastic error location panel
+        Errors
+      else
+        lclose
+      endif
+    endfunction
+    nnoremap <silent> <C-e> :<C-u>call ToggleErrors()<CR>
 
 " }
 
