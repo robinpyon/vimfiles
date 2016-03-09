@@ -2,25 +2,25 @@
 
 snippet bbc "Backbone Collection" w
 Backbone.Collection.extend({
-	${1} 
+	${1}
 });
 endsnippet
 
 snippet bbm "Backbone Model" w
 Backbone.Model.extend({
-	${1} 
+	${1}
 });
 endsnippet
 
 snippet bbr "Backbone Router" w
 Backbone.Router.extend({
-	${1} 
+	${1}
 });
 endsnippet
 
 snippet bbv "Backbone View" w
 Backbone.View.extend({
-	${1} 
+	${1}
 });
 endsnippet
 
@@ -32,7 +32,7 @@ endsnippet
 
 # Node
 
-snippet writeHead "Write header" w 
+snippet writeHead "Write header" w
 writeHead(${1:200}, {'Content-Type': ${2:'text/plain'}});
 endsnippet
 
@@ -49,7 +49,7 @@ endsnippet
 snippet def "require.js define block (with dependencies)"
 define([
 	${1}
-], 
+],
 function(${2}){
 	return {
 	};
@@ -61,7 +61,7 @@ define([
 	'jquery',
 	'underscore',
 	'backbone'
-], 
+],
 function($, _, Backbone){
 	return {
 		${1}
@@ -94,9 +94,13 @@ snippet cl "Console.log()" w
 console.log(${1});
 endsnippet
 
+snippet ccl "Console.log('$1:', $1)"
+console.log('${1}:', $1);
+endsnippet
+
 snippet efn "Anonymous function expression" w
-${1:var} ${2:fn}: function() { 
-	${3} 
+${1:var} ${2:fn}: function() {
+	${3}
 }
 endsnippet
 
@@ -113,8 +117,8 @@ function(${1}) { ${2} }
 endsnippet
 
 snippet fnn "Named function declaration" w
-function ${1}(${2}) { 
-	${3} 
+function ${1}(${2}) {
+	${3}
 }
 endsnippet
 

@@ -11,7 +11,9 @@ Clone the repo
 Create symlinks
 
     ln -s ~/.vimfiles ~/.vim
+    ln -s ~/.vimfiles ~/.config/nvim
     ln -s ~/.vimfiles/.vimrc.symlink ~/.vimrc
+    ln -s ~/.vimfiles/.vimrc.symlink ~/.config/nvim/init.vim
 
 Update submodule
 
@@ -22,8 +24,8 @@ Update submodule
 Install all vim plugins managed by vundle
 
 	(open vim)
-	:BundleInstall
-	
+	:NeoBundleInstall
+
 ### Environment
 ---
 

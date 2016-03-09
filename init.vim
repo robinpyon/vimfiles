@@ -1,0 +1,1 @@
+/Users/rpyon/.vimfiles/.vimrc.symlink
