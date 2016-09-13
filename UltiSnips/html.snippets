@@ -11,7 +11,7 @@ endsnippet
 snippet t "A simple HTML tag" b
 <${1:div}>
     Hello World
-</${1/(\w+).*/$1/}> 
+</${1/(\w+).*/$1/}>
 endsnippet
 
 snippet todo "This is a TODO reminder" b
@@ -38,4 +38,21 @@ endsnippet
 
 snippet webfont:google "Google Webfont" b
 <link href='http://fonts.googleapis.com/css?family=${1:Ubuntu+Mono}' rel='stylesheet' type='text/css'>
+endsnippet
+
+# HTML
+
+snippet h5 "Html 5 skeleton"
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="robots" content="" />
+</head>
+<body>
+  ${1}
+</body>
+</html>
 endsnippet

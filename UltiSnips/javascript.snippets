@@ -1,83 +1,7 @@
-# Backbone helpers
-
-snippet bbc "Backbone Collection" w
-Backbone.Collection.extend({
-	${1}
-});
-endsnippet
-
-snippet bbm "Backbone Model" w
-Backbone.Model.extend({
-	${1}
-});
-endsnippet
-
-snippet bbr "Backbone Router" w
-Backbone.Router.extend({
-	${1}
-});
-endsnippet
-
-snippet bbv "Backbone View" w
-Backbone.View.extend({
-	${1}
-});
-endsnippet
-
-snippet init "initialize" w
-initialize: function() {
-	${1}
-}
-endsnippet
-
 # Node
 
 snippet writeHead "Write header" w
 writeHead(${1:200}, {'Content-Type': ${2:'text/plain'}});
-endsnippet
-
-# RequireJS
-
-snippet def "require.js define block (no dependencies)"
-define(function(){
-	${1}
-	return {
-	};
-});
-endsnippet
-
-snippet def "require.js define block (with dependencies)"
-define([
-	${1}
-],
-function(${2}){
-	return {
-	};
-});
-endsnippet
-
-snippet def "require.js define block (with backbone.js dependencies)"
-define([
-	'jquery',
-	'underscore',
-	'backbone'
-],
-function($, _, Backbone){
-	return {
-		${1}
-	};
-});
-endsnippet
-
-snippet req "require.js block"
-require([${1}], function(${2}){
-});
-endsnippet
-
-snippet reqconf "require.js config block"
-require.config({
-	${1}
-});
 endsnippet
 
 # General
@@ -92,6 +16,14 @@ endsnippet
 
 snippet cl "Console.log()" w
 console.log(${1});
+endsnippet
+
+snippet ccw "Console.warn('$1:', $1)"
+console.warn('${1}:', $1);
+endsnippet
+
+snippet cci "Console.info('$1:', $1)"
+console.info('${1}:', $1);
 endsnippet
 
 snippet ccl "Console.log('$1:', $1)"
