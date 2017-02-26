@@ -23,6 +23,7 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/denite.nvim'
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
@@ -34,12 +35,12 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 
 NeoBundle 'chriskempson/base16-vim'                   " Base 16 color theme
+NeoBundle 'sheerun/vim-polyglot'                      " Syntax and indent support for most languages
 NeoBundle 'danro/rename.vim'
 NeoBundle 'bling/vim-airline'                         " Statusbar
 NeoBundle 'dkprice/vim-easygrep'
 NeoBundle 'editorconfig/editorconfig-vim'             " .editorconfig support
 NeoBundle 'ervandew/supertab'
-NeoBundle 'evanmiller/nginx-vim-syntax'               " nginx syntax highlighting
 NeoBundle 'jiangmiao/auto-pairs'
 NeoBundle 'justinmk/vim-gtfo'                         " Go to terminal or file manager
 NeoBundle 'justinmk/vim-sneak'
@@ -47,7 +48,8 @@ NeoBundle 'kshenoy/vim-signature'
 NeoBundle 'mattn/emmet-vim'                           " Emmet support
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'mileszs/ack.vim'
-NeoBundle 'osyo-manga/unite-quickfix'
+" NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'posva/vim-vue'                             " Vue (syntax)
 NeoBundle 'benekastah/neomake'                        " Syntastic-like functionality for neovim
 NeoBundle 'tommcdo/vim-exchange'
 NeoBundle 'tomtom/tcomment_vim'                       " File type specific comments
@@ -60,16 +62,20 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'                        " Surround key mappings
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'Shougo/deoplete.nvim'                      " Autocompletion
+NeoBundle 'Shougo/neoyank.vim'                        " Yank history
 NeoBundle 'Shougo/vimfiler.vim'                       " File explorer
 NeoBundle 'SirVer/ultisnips'                          " Snippets
 NeoBundle 'vim-airline/vim-airline-themes'            " (Requires vim-airline) Color themes
+NeoBundle 'schickling/vim-bufonly'                    " Close all buffers except the current one
 
 " Filetype plugins:
 NeoBundle 'mxw/vim-jsx'                               " React JSX (syntax + indenting)
 NeoBundle 'tikhomirov/vim-glsl'                       " GLSL (syntax)
-NeoBundle 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
+
 
 " Unused:
+" NeoBundle 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
+" NeoBundle 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
 " NeoBundle 'chrisbra/Colorizer'
 " NeoBundle 'rstacruz/vim-hyperstyle'
 " NeoBundle 'Lokaltog/vim-easymotion'
@@ -92,6 +98,24 @@ NeoBundleCheck
 
 " }
 
+
+" Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+" If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+" (see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+
 " General {
     filetype plugin indent on           " automatically detect file types
     set noerrorbells                    " disable error bells
@@ -104,7 +128,7 @@ NeoBundleCheck
     " Source .vimrc when saved
     " au BufWritePost .vimrc source ~/.vimrc
     augroup myvimrchooks
-      au!
+      autocmd!
       au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
     augroup END
 
@@ -193,7 +217,7 @@ NeoBundleCheck
     au BufRead,BufNewFile *.hbs setf html
 
     " JavaScript
-    au BufRead,BufNewFile *.json,*.ejs,*.es6 setf javascript
+    au BufRead,BufNewFile *.ejs,*.es6,*.json setf javascript
 
     " Ruby
     " au BufEnter,BufRead,BufNewFile *.erb setf html.javascript.ruby
@@ -302,6 +326,9 @@ NeoBundleCheck
     vnoremap <Tab> >gv
     vnoremap <S-Tab> <gv
 
+    " Close all open buffers
+    command! Bda bufdo bd
+
     " Open current file in Marked and redraw screen
     command! Marked silent !open -a "Marked.app" "%:p"
     nmap <silent> <leader>m :Marked<CR>\|:redraw!<CR>
@@ -342,29 +369,34 @@ NeoBundleCheck
 
 " Unite {
 
+  " Grep
+  nnoremap <silent><Leader>a  :Unite -silent -no-quit grep:.<CR>
+  nnoremap <silent><Leader>A  :UniteWithCursorWord -silent -no-quit grep:.<CR>
+
+  " MRU
+  nnoremap <silent><Leader>m  :Unite -silent file_mru<CR>
+
   " Files
   nnoremap <silent><Leader>o  :Unite -silent -start-insert file<CR>
   nnoremap <silent><Leader>O  :Unite -silent -start-insert file_rec/async<CR>
   nnoremap <C-P>              :Unite -buffer-name=files -silent -start-insert file_rec/async<CR>
 
-  nnoremap <silent><Leader>m  :Unite -silent file_mru<CR>
-
   " Buffers
-  nnoremap <silent><Leader>b  :Unite -silent -start-insert buffer<CR>
+  nnoremap <silent><Leader>b  :Unite -silent buffer<CR>
   " Buffer search
-  nnoremap <silent><Leader>f  :Unite -silent -no-split -start-insert -auto-preview
-              \ line<CR>
-  " Grep
-  nnoremap <silent><Leader>a  :Unite -silent -no-quit grep:.<CR>
-  nnoremap <silent><Leader>A  :UniteWithCursorWord -silent -no-quit grep:.<CR>
+  nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -auto-preview buffer<CR>
+
+  " Yank
+  nnoremap <silent><Leader>y  :Unite history/yank<CR>
+
 
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
   call unite#filters#sorter_default#use(['sorter_rank'])
 
   let g:unite_source_grep_max_candidates = 200
 
-  call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-    \ 'ignore_pattern', join([
+  call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep', 'ignore_pattern',
+    \ join([
     \ '\.git/',
     \ 'bower_components/',
     \ 'node_modules/',
@@ -373,14 +405,12 @@ NeoBundleCheck
   " Use ag over grep
   if executable('ag')
     let g:unite_source_grep_command = 'ag'
-    " let g:unite_source_grep_default_opts='-i --line-numbers --nocolor --nogroup --hidden -p /Users/rpyon/.agignore'
     let g:unite_source_grep_default_opts =
     \ '-i --vimgrep --hidden --ignore ' .
     \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
     let g:unite_source_grep_recursive_opt = ''
 		let g:unite_source_rec_async_command =
-    \ ['ag', '--follow', '--nocolor', '--nogroup',
-		\  '--hidden', '-g', '']
+    \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
   endif
 
   let g:default_context = {
