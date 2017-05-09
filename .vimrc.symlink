@@ -39,6 +39,7 @@ NeoBundle 'sheerun/vim-polyglot'                      " Syntax and indent suppor
 NeoBundle 'danro/rename.vim'
 NeoBundle 'bling/vim-airline'                         " Statusbar
 NeoBundle 'dkprice/vim-easygrep'
+NeoBundle 'easymotion/vim-easymotion'
 NeoBundle 'editorconfig/editorconfig-vim'             " .editorconfig support
 NeoBundle 'ervandew/supertab'
 NeoBundle 'jiangmiao/auto-pairs'
@@ -49,6 +50,7 @@ NeoBundle 'mattn/emmet-vim'                           " Emmet support
 NeoBundle 'mhinz/vim-signify'
 NeoBundle 'mileszs/ack.vim'
 " NeoBundle 'osyo-manga/unite-quickfix'
+NeoBundle 'osyo-manga/vim-anzu'
 NeoBundle 'posva/vim-vue'                             " Vue (syntax)
 NeoBundle 'benekastah/neomake'                        " Syntastic-like functionality for neovim
 NeoBundle 'tommcdo/vim-exchange'
@@ -62,7 +64,7 @@ NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-surround'                        " Surround key mappings
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'Shougo/deoplete.nvim'                      " Autocompletion
-NeoBundle 'Shougo/neoyank.vim'                        " Yank history
+" NeoBundle 'Shougo/neoyank.vim'                        " Yank history
 NeoBundle 'Shougo/vimfiler.vim'                       " File explorer
 NeoBundle 'SirVer/ultisnips'                          " Snippets
 NeoBundle 'vim-airline/vim-airline-themes'            " (Requires vim-airline) Color themes
@@ -78,7 +80,6 @@ NeoBundle 'tikhomirov/vim-glsl'                       " GLSL (syntax)
 " NeoBundle 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
 " NeoBundle 'chrisbra/Colorizer'
 " NeoBundle 'rstacruz/vim-hyperstyle'
-" NeoBundle 'Lokaltog/vim-easymotion'
 " NeoBundle 'milkypostman/vim-togglelist'
 " - Dash:
 " NeoBundle 'rizzatti/dash.vim'
@@ -128,17 +129,17 @@ endif
     " Source .vimrc when saved
     " au BufWritePost .vimrc source ~/.vimrc
     augroup myvimrchooks
-      autocmd!
+      au!
       au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
-    augroup END
 
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
-    autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \   exe "normal g`\"" |
-        \ endif
+      " When editing a file, always jump to the last known cursor position.
+      " Don't do it when the position is invalid or when inside an event handler
+      " (happens when dropping a file on gvim).
+      au BufReadPost *
+          \ if line("'\"") > 0 && line("'\"") <= line("$") |
+          \   exe "normal g`\"" |
+          \ endif
+    augroup END
 " }
 
 " Vim UI {
@@ -199,7 +200,7 @@ endif
   augroup configgroup
 
     " Clear autocommands for current group
-    autocmd!
+    au!
 
     " Arduino
     au BufRead,BufNewFile *.ino,*.pde set filetype=cpp
@@ -220,17 +221,22 @@ endif
     au BufRead,BufNewFile *.ejs,*.es6,*.json setf javascript
 
     " Ruby
-    " au BufEnter,BufRead,BufNewFile *.erb setf html.javascript.ruby
     au BufEnter,BufRead,BufNewFile *.json.rabl,*.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
+
+    " Vue
+    " au BufRead,BufNewFile *.vue setf vue
 
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache
 
     " On save: remove trailing whitespaces and ^M chars
-    au FileType c,cpp,java,php,javascript,python,twig,xml,yml autocmd BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+    au FileType c,cpp,java,php,javascript,python,twig,xml,yml au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
+
+    " Replicate ctrl-p style navigation
+    au FileType unite call s:unite_settings()
 
     " On save: run Neomake
-    autocmd! BufWritePost * Neomake
+    au! BufWritePost * Neomake
 
   augroup END
 
@@ -296,12 +302,15 @@ endif
     nmap <Leader><Space>o :lopen<CR>
     " Close location window
     nmap <Leader><Space>c :lclose<CR>
+    " Close all location windows
+    " nmap <Leader><Space>c :windo if &buftype == "quickfix" || &buftype == "locationlist" | lclose | endif<CR>
     " Go to current error/warning
     nmap <Leader><Space>, :ll<CR>
     " Next error/warning
     nmap <Leader><Space>n :lnext<CR>
     " Previous error/warning
     nmap <Leader><Space>p :lprev<CR>
+
 
     " Tidy visually selected lines (indenting, quiet mode, no logging)
     " http://vim.wikia.com/wiki/Cleanup_your_HTML
@@ -387,8 +396,7 @@ endif
   nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -auto-preview buffer<CR>
 
   " Yank
-  nnoremap <silent><Leader>y  :Unite history/yank<CR>
-
+  " nnoremap <silent><Leader>y  :Unite history/yank<CR>
 
   call unite#filters#matcher_default#use(['matcher_fuzzy'])
   call unite#filters#sorter_default#use(['sorter_rank'])
@@ -425,9 +433,6 @@ endif
   \ }
 
   call unite#custom#profile('default', 'context', default_context)
-
-  " Replicate ctrl-p style navigation
-  autocmd FileType unite call s:unite_settings()
 
   function! s:unite_settings()
     " let b:SuperTabDisabled=1
