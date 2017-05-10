@@ -5,97 +5,81 @@
 "
 " }
 
-" Plugins (NeoBundle) {
+" Plugins (vim-plug) {
 
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
+" Make sure to use single quotes
 
-if has('vim_starting')
-  set runtimepath+=~/.nvim/bundle/neobundle.vim/
-endif
+" Specify a directory for plugins (for vim: ~/.vim/plugged)
+call plug#begin('~/.local/share/nvim/plugged')
 
-call neobundle#begin(expand('~/.nvim/bundle/'))
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'Shougo/neomru.vim'
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-NeoBundleFetch 'Shougo/neobundle.vim'                 " Required for NeoBundle
+Plug 'junegunn/fzf', { 'do': './install --bin' }  " Fuzzy finder
+Plug 'junegunn/fzf.vim'
+Plug 'tweekmonster/fzf-filemru'                   " FZF MRU plugin
 
-" Deps
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/unite.vim'
-" NeoBundle 'Shougo/denite.nvim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-
-NeoBundle 'chriskempson/base16-vim'                   " Base 16 color theme
-NeoBundle 'sheerun/vim-polyglot'                      " Syntax and indent support for most languages
-NeoBundle 'danro/rename.vim'
-NeoBundle 'bling/vim-airline'                         " Statusbar
-NeoBundle 'dkprice/vim-easygrep'
-NeoBundle 'easymotion/vim-easymotion'
-NeoBundle 'editorconfig/editorconfig-vim'             " .editorconfig support
-NeoBundle 'ervandew/supertab'
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'justinmk/vim-gtfo'                         " Go to terminal or file manager
-NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'kshenoy/vim-signature'
-NeoBundle 'mattn/emmet-vim'                           " Emmet support
-NeoBundle 'mhinz/vim-signify'
-NeoBundle 'mileszs/ack.vim'
-" NeoBundle 'osyo-manga/unite-quickfix'
-NeoBundle 'osyo-manga/vim-anzu'
-NeoBundle 'posva/vim-vue'                             " Vue (syntax)
-NeoBundle 'benekastah/neomake'                        " Syntastic-like functionality for neovim
-NeoBundle 'tommcdo/vim-exchange'
-NeoBundle 'tomtom/tcomment_vim'                       " File type specific comments
-NeoBundle 'tpope/vim-endwise'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'tpope/vim-fugitive'                        " Git wrapper
-NeoBundle 'tpope/vim-ragtag'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-surround'                        " Surround key mappings
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'Shougo/deoplete.nvim'                      " Autocompletion
-" NeoBundle 'Shougo/neoyank.vim'                        " Yank history
-NeoBundle 'Shougo/vimfiler.vim'                       " File explorer
-NeoBundle 'SirVer/ultisnips'                          " Snippets
-NeoBundle 'vim-airline/vim-airline-themes'            " (Requires vim-airline) Color themes
-NeoBundle 'schickling/vim-bufonly'                    " Close all buffers except the current one
+Plug 'chriskempson/base16-vim'                    " Base 16 color theme
+Plug 'sheerun/vim-polyglot'                       " Syntax and indent support for most languages
+Plug 'w0rp/ale'                                   " Async linting
+Plug 'danro/rename.vim'
+Plug 'bling/vim-airline'                          " Statusbar
+Plug 'dkprice/vim-easygrep'
+Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'              " .editorconfig support
+Plug 'ervandew/supertab'
+Plug 'jiangmiao/auto-pairs'
+Plug 'justinmk/vim-gtfo'                          " Go to terminal or file manager
+Plug 'justinmk/vim-sneak'
+Plug 'kshenoy/vim-signature'
+Plug 'mattn/emmet-vim'                            " Emmet support
+Plug 'mhinz/vim-signify'
+Plug 'mileszs/ack.vim'
+Plug 'osyo-manga/vim-anzu'
+Plug 'posva/vim-vue'                              " Vue (syntax)
+Plug 'tommcdo/vim-exchange'
+Plug 'tomtom/tcomment_vim'                        " File type specific comments
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'                         " Git wrapper
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'                         " Surround key mappings
+Plug 'tpope/vim-unimpaired'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " Autocompletion
+" Plug 'Shougo/neoyank.vim'                        " Yank history
+Plug 'Shougo/vimfiler.vim'                        " File explorer
+Plug 'SirVer/ultisnips'                           " Snippets
+Plug 'vim-airline/vim-airline-themes'             " (Requires vim-airline) Color themes
+Plug 'schickling/vim-bufonly'                     " Close all buffers except the current one
 
 " Filetype plugins:
-NeoBundle 'mxw/vim-jsx'                               " React JSX (syntax + indenting)
-NeoBundle 'tikhomirov/vim-glsl'                       " GLSL (syntax)
+Plug 'mxw/vim-jsx'                                " React JSX (syntax + indenting)
+Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
+Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
 
 
 " Unused:
-" NeoBundle 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
-" NeoBundle 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
-" NeoBundle 'chrisbra/Colorizer'
-" NeoBundle 'rstacruz/vim-hyperstyle'
-" NeoBundle 'milkypostman/vim-togglelist'
+" Plug 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
+" Plug 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
+" Plug 'chrisbra/Colorizer'
+" Plug 'rstacruz/vim-hyperstyle'
+" Plug 'milkypostman/vim-togglelist'
 " - Dash:
-" NeoBundle 'rizzatti/dash.vim'
+" Plug 'rizzatti/dash.vim'
 " - Tags:
-" NeoBundle 'majutsushi/tagbar'
-" NeoBundle 'xolox/vim-misc'
-" NeoBundle 'xolox/vim-easytags'
-" NeoBundle 'marijnh/tern_for_vim'
-" NeoBundle 'szw/vim-tags'
+" Plug 'majutsushi/tagbar'
+" Plug 'xolox/vim-misc'
+" Plug 'xolox/vim-easytags'
+" Plug 'marijnh/tern_for_vim'
+" Plug 'szw/vim-tags'
 
-call neobundle#end()
-
-filetype plugin indent on                             " Required for NeoBundle
-
-" Prompt to install uninstalled bundles on startup
-NeoBundleCheck
+" Initialize plugin system
+call plug#end()
 
 " }
 
@@ -118,28 +102,28 @@ endif
 
 
 " General {
-    filetype plugin indent on           " automatically detect file types
-    set noerrorbells                    " disable error bells
-    set vb t_vb=                        " disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
-    set shm+=I                          " hide startup message
-    set synmaxcol=200                   " limit highlighting so vim doesn't choke on minified files
+  filetype plugin indent on           " automatically detect file types
+  set noerrorbells                    " disable error bells
+  set vb t_vb=                        " disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
+  set shm+=I                          " hide startup message
+  set synmaxcol=200                   " limit highlighting so vim doesn't choke on minified files
 
-    set foldmethod=indent
+  set foldmethod=indent
 
-    " Source .vimrc when saved
-    " au BufWritePost .vimrc source ~/.vimrc
-    augroup myvimrchooks
-      au!
-      au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
+  " Source .vimrc when saved
+  " au BufWritePost .vimrc source ~/.vimrc
+  augroup myvimrchooks
+    au!
+    au BufWritePost .vimrc,.vimrc.symlink source $MYVIMRC
 
-      " When editing a file, always jump to the last known cursor position.
-      " Don't do it when the position is invalid or when inside an event handler
-      " (happens when dropping a file on gvim).
-      au BufReadPost *
-          \ if line("'\"") > 0 && line("'\"") <= line("$") |
-          \   exe "normal g`\"" |
-          \ endif
-    augroup END
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid or when inside an event handler
+    " (happens when dropping a file on gvim).
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal g`\"" |
+        \ endif
+  augroup END
 " }
 
 " Vim UI {
@@ -232,11 +216,7 @@ endif
     " On save: remove trailing whitespaces and ^M chars
     au FileType c,cpp,java,php,javascript,python,twig,xml,yml au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-    " Replicate ctrl-p style navigation
     au FileType unite call s:unite_settings()
-
-    " On save: run Neomake
-    au! BufWritePost * Neomake
 
   augroup END
 
@@ -363,17 +343,6 @@ endif
       endfor
       return join(values(buffer_numbers))
     endfunction
-
-    " function! ToggleErrors()
-    "   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
-    "     " No location/quickfix list shown, open syntastic error location panel
-    "     Errors
-    "   else
-    "     lclose
-    "   endif
-    " endfunction
-    " nnoremap <silent> <C-e> :<C-u>call ToggleErrors()<CR>
-
 " }
 
 " Unite {
@@ -383,15 +352,15 @@ endif
   nnoremap <silent><Leader>A  :UniteWithCursorWord -silent -no-quit grep:.<CR>
 
   " MRU
-  nnoremap <silent><Leader>m  :Unite -silent file_mru<CR>
+  nnoremap <silent><Leader>m  :ProjectMru<CR>
 
   " Files
   nnoremap <silent><Leader>o  :Unite -silent -start-insert file<CR>
   nnoremap <silent><Leader>O  :Unite -silent -start-insert file_rec/async<CR>
-  nnoremap <C-P>              :Unite -buffer-name=files -silent -start-insert file_rec/async<CR>
+  nnoremap <C-P>              :FZF<CR>
 
   " Buffers
-  nnoremap <silent><Leader>b  :Unite -silent buffer<CR>
+  nnoremap <silent><Leader>b  :Buffers<CR>
   " Buffer search
   nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -auto-preview buffer<CR>
 

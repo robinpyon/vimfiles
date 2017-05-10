@@ -15,21 +15,7 @@ Create symlinks
     ln -s ~/.vimfiles/.vimrc.symlink ~/.vimrc
     ln -s ~/.vimfiles/.vimrc.symlink ~/.config/nvim/init.vim
 
-Update submodule
+Install all vim plugins
 
-    cd ~/vimfiles
-    git submodule init
-    git submodule update
-
-Install all vim plugins managed by vundle
-
-	(open vim)
-	:NeoBundleInstall
-
-### Environment
----
-
-Mac OS X / iTerm2 / bash
-
-### TODO:
----
+	  (open vim)
+	  :PluginInstall
