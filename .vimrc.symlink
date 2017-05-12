@@ -1,88 +1,85 @@
-" Modeline and Notes {
+" MODELINE / NOTES {
 " vim: set foldmarker={,} foldlevel=1 foldmethod=marker foldopen+=search:
 "
 "   Robin Pyon's VIM config
 "
 " }
 
-" Plugins (vim-plug) {
+" PLUGINS {
 
-" Make sure to use single quotes
+  " - Plugins are managed with vim-plug
+  " - Make sure to use single quotes!
 
-" Specify a directory for plugins (for vim: ~/.vim/plugged)
-call plug#begin('~/.local/share/nvim/plugged')
+  " Specify a directory for plugins (for vim: ~/.vim/plugged)
+  call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'Shougo/neomru.vim'
-Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'MarcWeber/vim-addon-mw-utils'
+  Plug 'tomtom/tlib_vim'
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
-Plug 'junegunn/fzf', { 'do': './install --bin' }  " Fuzzy finder
-Plug 'junegunn/fzf.vim'
-Plug 'tweekmonster/fzf-filemru'                   " FZF MRU plugin
+  Plug 'junegunn/fzf', { 'do': './install --bin' }  " Fuzzy finder
+  Plug 'junegunn/fzf.vim'
+  Plug 'tweekmonster/fzf-filemru'                   " FZF MRU plugin
 
-Plug 'chriskempson/base16-vim'                    " Base 16 color theme
-Plug 'sheerun/vim-polyglot'                       " Syntax and indent support for most languages
-Plug 'w0rp/ale'                                   " Async linting
-Plug 'danro/rename.vim'
-Plug 'bling/vim-airline'                          " Statusbar
-Plug 'dkprice/vim-easygrep'
-Plug 'easymotion/vim-easymotion'
-Plug 'editorconfig/editorconfig-vim'              " .editorconfig support
-Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
-Plug 'justinmk/vim-gtfo'                          " Go to terminal or file manager
-Plug 'justinmk/vim-sneak'
-Plug 'kshenoy/vim-signature'
-Plug 'mattn/emmet-vim'                            " Emmet support
-Plug 'mhinz/vim-signify'
-Plug 'mileszs/ack.vim'
-Plug 'osyo-manga/vim-anzu'
-Plug 'posva/vim-vue'                              " Vue (syntax)
-Plug 'tommcdo/vim-exchange'
-Plug 'tomtom/tcomment_vim'                        " File type specific comments
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'                         " Git wrapper
-Plug 'tpope/vim-ragtag'
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'                         " Surround key mappings
-Plug 'tpope/vim-unimpaired'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " Autocompletion
-" Plug 'Shougo/neoyank.vim'                        " Yank history
-Plug 'Shougo/vimfiler.vim'                        " File explorer
-Plug 'SirVer/ultisnips'                           " Snippets
-Plug 'vim-airline/vim-airline-themes'             " (Requires vim-airline) Color themes
-Plug 'schickling/vim-bufonly'                     " Close all buffers except the current one
+  Plug 'chriskempson/base16-vim'                    " Base 16 color theme
+  Plug 'sheerun/vim-polyglot'                       " Syntax and indent support for most languages
+  Plug 'w0rp/ale'                                   " Async linting
+  Plug 'danro/rename.vim'
+  Plug 'bling/vim-airline'                          " Statusbar
+  Plug 'dkprice/vim-easygrep'
+  Plug 'easymotion/vim-easymotion'
+  Plug 'editorconfig/editorconfig-vim'              " .editorconfig support
+  Plug 'ervandew/supertab'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'justinmk/vim-gtfo'                          " Go to terminal or file manager
+  Plug 'justinmk/vim-sneak'
+  Plug 'kshenoy/vim-signature'
+  Plug 'mattn/emmet-vim'                            " Emmet support
+  Plug 'mhinz/vim-signify'
+  Plug 'mileszs/ack.vim'
+  Plug 'osyo-manga/vim-anzu'
+  Plug 'tommcdo/vim-exchange'
+  Plug 'tomtom/tcomment_vim'                        " File type specific comments
+  Plug 'tpope/vim-endwise'
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'                         " Git wrapper
+  Plug 'tpope/vim-ragtag'
+  Plug 'tpope/vim-rails'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'                         " Surround key mappings
+  Plug 'tpope/vim-unimpaired'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }     " Autocompletion
+  Plug 'Shougo/vimfiler.vim'                        " File explorer
+  Plug 'SirVer/ultisnips'                           " Snippets
+  Plug 'vim-airline/vim-airline-themes'             " (Requires vim-airline) Color themes
+  Plug 'schickling/vim-bufonly'                     " Close all buffers except the current one
 
-" Filetype plugins:
-Plug 'mxw/vim-jsx'                                " React JSX (syntax + indenting)
-Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
-Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
+  " Filetype plugins:
+  Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
+  Plug 'mxw/vim-jsx'                                " React JSX (syntax + indenting)
+  Plug 'posva/vim-vue'                              " Vue (syntax)
+  Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
 
+  " Unused:
+  " Plug 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
+  " Plug 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
+  " Plug 'chrisbra/Colorizer'
+  " Plug 'rstacruz/vim-hyperstyle'
+  " Plug 'milkypostman/vim-togglelist'
+  " - Dash:
+  " Plug 'rizzatti/dash.vim'
+  " - Tags:
+  " Plug 'majutsushi/tagbar'
+  " Plug 'xolox/vim-misc'
+  " Plug 'xolox/vim-easytags'
+  " Plug 'marijnh/tern_for_vim'
+  " Plug 'szw/vim-tags'
 
-" Unused:
-" Plug 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
-" Plug 'pangloss/vim-javascript'                   " JavaScript (synax + indenting)
-" Plug 'chrisbra/Colorizer'
-" Plug 'rstacruz/vim-hyperstyle'
-" Plug 'milkypostman/vim-togglelist'
-" - Dash:
-" Plug 'rizzatti/dash.vim'
-" - Tags:
-" Plug 'majutsushi/tagbar'
-" Plug 'xolox/vim-misc'
-" Plug 'xolox/vim-easytags'
-" Plug 'marijnh/tern_for_vim'
-" Plug 'szw/vim-tags'
-
-" Initialize plugin system
-call plug#end()
+  " Initialize plugin system
+  call plug#end()
 
 " }
-
 
 " Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 " If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -101,7 +98,8 @@ if (empty($TMUX))
 endif
 
 
-" General {
+" GENERAL {
+
   filetype plugin indent on           " automatically detect file types
   set noerrorbells                    " disable error bells
   set vb t_vb=                        " disable visual / audio bells for non error events (e.g. pressing ESC, edge scrolling)
@@ -126,7 +124,7 @@ endif
   augroup END
 " }
 
-" Vim UI {
+" UI {
 
   " Colors
   syntax on                           " enable syntax highlighting
@@ -179,7 +177,7 @@ endif
   endif
 " }
 
-" Autogroups {
+" AUTOGROUPS {
 
   augroup configgroup
 
@@ -216,136 +214,113 @@ endif
     " On save: remove trailing whitespaces and ^M chars
     au FileType c,cpp,java,php,javascript,python,twig,xml,yml au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-    au FileType unite call s:unite_settings()
+    " au FileType unite call s:unite_settings()
 
   augroup END
 
 " }
 
-" Key mappings {
+" MAPPINGS {
 
-    let mapleader = ","                 " change the mapleader from \ to ,
+  let mapleader = ","                 " change the mapleader from \ to ,
 
-    nnoremap <space> :
+  nnoremap <space> :
 
-    " Easy navigation between windows
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-l> <C-w>l
+  " Easy navigation between windows
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
 
-    " Buffer navigation
-    nnoremap <C-j> :bprevious<CR>
-    nnoremap <C-k> :bnext<CR>
-    nnoremap <C-c> :Bdelete<CR>
+  " Buffer navigation
+  nnoremap <C-j> :bprevious<CR>
+  nnoremap <C-k> :bnext<CR>
+  nnoremap <C-c> :Bdelete<CR>
 
-    " Wrapped lines goes down/up to next row, rather than next line in file.
-    nnoremap j gj
-    nnoremap k gk
+  " Wrapped lines goes down/up to next row, rather than next line in file.
+  nnoremap j gj
+  nnoremap k gk
 
-    " Properly interpret arrow keys when run within a tmux session
-    if &term =~ '^screen'
-        execute "set <xUp>=\e[1;*A"
-        execute "set <xDown>=\e[1;*B"
-        execute "set <xRight>=\e[1;*C"
-        execute "set <xLeft>=\e[1;*D"
-    endif
+  " Properly interpret arrow keys when run within a tmux session
+  if &term =~ '^screen'
+      execute "set <xUp>=\e[1;*A"
+      execute "set <xDown>=\e[1;*B"
+      execute "set <xRight>=\e[1;*C"
+      execute "set <xLeft>=\e[1;*D"
+  endif
 
-    " Yank from the cursor to the end of the line, to be consistent with C and D.
-    nnoremap Y y$
+  " Yank from the cursor to the end of the line, to be consistent with C and D.
+  nnoremap Y y$
 
-    " Use tidy when using the = operator
-    " http://vim.wikia.com/wiki/Cleanup_your_HTML#Using_tidy_for_html_files
-    " TODO: what is setlocal?
-    " :setlocal equalprg=tidyp\ -indent\ -quiet\ --indent-spaces\ 4\ --show-body-only\ 1\ --show-errors\ 0\ --tidy-mark\ 0\ --wrap\ 0
+  " Use tidy when using the = operator
+  " http://vim.wikia.com/wiki/Cleanup_your_HTML#Using_tidy_for_html_files
+  " TODO: what is setlocal?
+  " :setlocal equalprg=tidyp\ -indent\ -quiet\ --indent-spaces\ 4\ --show-body-only\ 1\ --show-errors\ 0\ --tidy-mark\ 0\ --wrap\ 0
 
-    " Easy access to commonly accessed rc files
-    nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
-    nnoremap <silent> <leader>ez :e ~/.zshrc<CR>
+  " Easy access to commonly accessed rc files
+  nnoremap <silent> <leader>ev :e $MYVIMRC<CR>
+  nnoremap <silent> <leader>ez :e ~/.zshrc<CR>
 
-    " Close buffer but don't close split
-    nmap <leader>d :b#<bar>bd#<CR>
+  " Close buffer but don't close split
+  nmap <leader>d :b#<bar>bd#<CR>
 
-    " Vimgrep and place cursor in correct position
-    nnoremap <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
+  " Vimgrep and place cursor in correct position
+  nnoremap <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
-    " Toggle display of invisible / non-printable characters
-    nnoremap <silent> <leader>i :set list!<CR>
+  " Toggle display of invisible / non-printable characters
+  nnoremap <silent> <leader>i :set list!<CR>
 
-    " Preserve indentation while pasting text from the OS X clipboard
-    noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
+  " Preserve indentation while pasting text from the OS X clipboard
+  noremap <leader>p :set paste<CR>:put  *<CR>:set nopaste<CR>
 
-    " Search and replace word at cursor
-    nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+  " Search and replace word at cursor
+  nnoremap <leader>s :%s/\<<C-r><C-w>\>/
 
-    " Open location window
-    nmap <Leader><Space>o :lopen<CR>
-    " Close location window
-    nmap <Leader><Space>c :lclose<CR>
-    " Close all location windows
-    " nmap <Leader><Space>c :windo if &buftype == "quickfix" || &buftype == "locationlist" | lclose | endif<CR>
-    " Go to current error/warning
-    nmap <Leader><Space>, :ll<CR>
-    " Next error/warning
-    nmap <Leader><Space>n :lnext<CR>
-    " Previous error/warning
-    nmap <Leader><Space>p :lprev<CR>
+  " Open location window
+  nmap <Leader><Space>o :lopen<CR>
+  " Close location window
+  nmap <Leader><Space>c :lclose<CR>
+  " Close all location windows
+  " nmap <Leader><Space>c :windo if &buftype == "quickfix" || &buftype == "locationlist" | lclose | endif<CR>
+  " Go to current error/warning
+  nmap <Leader><Space>, :ll<CR>
+  " Next error/warning
+  nmap <Leader><Space>n :lnext<CR>
+  " Previous error/warning
+  nmap <Leader><Space>p :lprev<CR>
 
+  " Tidy visually selected lines (indenting, quiet mode, no logging)
+  " http://vim.wikia.com/wiki/Cleanup_your_HTML
+  " vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
 
-    " Tidy visually selected lines (indenting, quiet mode, no logging)
-    " http://vim.wikia.com/wiki/Cleanup_your_HTML
-    " vnoremap <leader>t :!tidy -q -i --show-errors 0<CR>
+  vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
-    vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+  " Yank text to the OS X clipboard
+  noremap <leader>y "*y
+  noremap <leader>yy "*Y
 
-    " Yank text to the OS X clipboard
-    noremap <leader>y "*y
-    noremap <leader>yy "*Y
+  " Clearing highlighted search
+  nmap <silent> <leader>/ :nohlsearch<CR>
 
-    " Clearing highlighted search
-    nmap <silent> <leader>/ :nohlsearch<CR>
+  " Enable shift-tab to outdent in normal and insert mode
+  nmap <S-Tab> <<
+  imap <S-Tab> <Esc><<i
 
-    " Enable shift-tab to outdent in normal and insert mode
-    nmap <S-Tab> <<
-    imap <S-Tab> <Esc><<i
+  " Allow in/exdenting with tab and single angled quotes, while retaining visual selection
+  vnoremap > >gv
+  vnoremap < <gv
+  vnoremap <Tab> >gv
+  vnoremap <S-Tab> <gv
 
-    " Allow in/exdenting with tab and single angled quotes, while retaining visual selection
-    vnoremap > >gv
-    vnoremap < <gv
-    vnoremap <Tab> >gv
-    vnoremap <S-Tab> <gv
+  " Move up and down in autocomplete with <c-j> and <c-k>
+  inoremap <expr> <c-j> ("\<C-n>")
+  inoremap <expr> <c-k> ("\<C-p>")
 
-    " Close all open buffers
-    command! Bda bufdo bd
-
-    " Open current file in Marked and redraw screen
-    command! Marked silent !open -a "Marked.app" "%:p"
-    nmap <silent> <leader>m :Marked<CR>\|:redraw!<CR>
-
-    " Move up and down in autocomplete with <c-j> and <c-k>
-    inoremap <expr> <c-j> ("\<C-n>")
-    inoremap <expr> <c-k> ("\<C-p>")
-
-    map <silent> <F5> :if &background == 'light'<Bar>
-          \set background=dark<Bar>
-          \else <Bar>
-          \set background=light <Bar>
-          \endif<cr>
-
-    " Populate arguments with results from quickfix list
-    " Source: http://stackoverflow.com/a/5686810
-    command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
-    function! QuickfixFilenames()
-      " Building a hash ensures we get each buffer only once
-      let buffer_numbers = {}
-      for quickfix_item in getqflist()
-        let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-      endfor
-      return join(values(buffer_numbers))
-    endfunction
-" }
-
-" Unite {
+  map <silent> <F5> :if &background == 'light'<Bar>
+        \set background=dark<Bar>
+        \else <Bar>
+        \set background=light <Bar>
+        \endif<cr>
 
   " Grep
   nnoremap <silent><Leader>a  :Unite -silent -no-quit grep:.<CR>
@@ -362,75 +337,28 @@ endif
   " Buffers
   nnoremap <silent><Leader>b  :Buffers<CR>
   " Buffer search
-  nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -auto-preview buffer<CR>
+  nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -euto-preview buffer<CR>
 
-  " Yank
-  " nnoremap <silent><Leader>y  :Unite history/yank<CR>
+" }
 
-  call unite#filters#matcher_default#use(['matcher_fuzzy'])
-  call unite#filters#sorter_default#use(['sorter_rank'])
+" COMMANDS {
 
-  let g:unite_source_grep_max_candidates = 200
+  " Close all open buffers
+  command! Bda bufdo bd
 
-  call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep', 'ignore_pattern',
-    \ join([
-    \ '\.git/',
-    \ 'bower_components/',
-    \ 'node_modules/',
-    \ ], '\|'))
+  " Open current file in Marked and redraw screen
+  command! Marked silent !open -a "Marked.app" "%:p"
 
-  " Use ag over grep
-  if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-    \ '-i --vimgrep --hidden --ignore ' .
-    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-    let g:unite_source_grep_recursive_opt = ''
-		let g:unite_source_rec_async_command =
-    \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-  endif
-
-  let g:default_context = {
-    \ 'winheight' : 15,
-    \ 'update_time' : 200,
-    \ 'prompt' : '>>> ',
-    \ 'enable_start_insert' : 0,
-    \ 'enable_short_source_names' : 0,
-    \ 'marked_icon' : '✓',
-    \ 'ignorecase' : 1,
-    \ 'smartcase' : 1,
-  \ }
-
-  call unite#custom#profile('default', 'context', default_context)
-
-  function! s:unite_settings()
-    " let b:SuperTabDisabled=1
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-    imap <silent><buffer><expr> <C-x> unite#do_action('split')
-    imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-    imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
-
-    nmap <buffer> <ESC> <Plug>(unite_exit)
+  " Populate arguments with results from quickfix list
+  " Source: http://stackoverflow.com/a/5686810
+  command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+  function! QuickfixFilenames()
+    " Building a hash ensures we get each buffer only once
+    let buffer_numbers = {}
+    for quickfix_item in getqflist()
+      let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+    endfor
+    return join(values(buffer_numbers))
   endfunction
-
-" }
-
-" neomru.vim {
-
-  let g:neomru#file_mru_path = $HOME.'/.nvim/tmp/neomru/file'
-  let g:neomru#directory_mru_path = $HOME.'/.nvim/tmp/neomru/directory'
-
-" }
-
-" GUI (MacVim) settings {
-
-  if has('gui_running')
-    set guioptions-=T           " remove the toolbar
-    set lines=40                " 40 lines of text instead of 24,
-    set linespace=2
-  else
-    "set term=builtin_ansi       " Make arrow and other keys work
-  endif
 
 " }
