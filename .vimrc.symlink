@@ -18,6 +18,7 @@
 
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
+  Plug 'Shougo/unite.vim'                           " Required for vimfiler
   Plug 'Shougo/vimproc.vim', {'do' : 'make'}        " Required for deoplete
 
   Plug 'junegunn/fzf', { 'do': './install --bin' }  " Fuzzy finder
