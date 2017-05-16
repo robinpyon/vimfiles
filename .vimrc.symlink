@@ -14,12 +14,11 @@
   call plug#begin('~/.local/share/nvim/plugged')
 
   " 'Development' only
-  Plug 'guns/xterm-color-table.vim'                 " Displays colors (:XtermColorTable
+  Plug 'guns/xterm-color-table.vim'                 " Displays colors (:XtermColorTable)
 
   Plug 'MarcWeber/vim-addon-mw-utils'
   Plug 'tomtom/tlib_vim'
-  Plug 'Shougo/unite.vim'
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}        " Required for deoplete
 
   Plug 'junegunn/fzf', { 'do': './install --bin' }  " Fuzzy finder
   Plug 'junegunn/fzf.vim'
@@ -209,8 +208,6 @@ endif
     " On save: remove trailing whitespaces and ^M chars
     au FileType c,cpp,java,php,javascript,python,twig,xml,yml au BufWritePre <buffer> :call setline(1,map(getline(1,"$"),'substitute(v:val,"\\s\\+$","","")'))
 
-    " au FileType unite call s:unite_settings()
-
   augroup END
 
 " }
@@ -258,9 +255,6 @@ endif
 
   " Close buffer but don't close split
   nmap <leader>d :b#<bar>bd#<CR>
-
-  " Vimgrep and place cursor in correct position
-  nnoremap <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
 
   " Toggle display of invisible / non-printable characters
   nnoremap <silent> <leader>i :set list!<CR>
@@ -318,22 +312,18 @@ endif
         \endif<cr>
 
   " Grep
-  nnoremap <silent><Leader>a  :Unite -silent -no-quit grep:.<CR>
-  nnoremap <silent><Leader>A  :UniteWithCursorWord -silent -no-quit grep:.<CR>
+  nnoremap <Leader>a          :Ack!<Space>
+  nnoremap <silent><Leader>A  :Ack!<CR>
+  nnoremap <C-A>              :Ag<CR>
 
   " MRU
   nnoremap <silent><Leader>m  :ProjectMru<CR>
 
   " Files
-  nnoremap <silent><Leader>o  :Unite -silent -start-insert file<CR>
-  nnoremap <silent><Leader>O  :Unite -silent -start-insert file_rec/async<CR>
   nnoremap <C-P>              :FZF<CR>
 
   " Buffers
-  nnoremap <silent><Leader>b  :Buffers<CR>
-  " Buffer search
-  " nnoremap <silent><Leader>f  :Unite -silent -split -start-insert -auto-preview buffer<CR>
-
+  nnoremap <C-B>              :Buffers<CR>
 " }
 
 " COMMANDS {
@@ -343,17 +333,5 @@ endif
 
   " Open current file in Marked and redraw screen
   command! Marked silent !open -a "Marked.app" "%:p"
-
-  " Populate arguments with results from quickfix list
-  " Source: http://stackoverflow.com/a/5686810
-  command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
-  function! QuickfixFilenames()
-    " Building a hash ensures we get each buffer only once
-    let buffer_numbers = {}
-    for quickfix_item in getqflist()
-      let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
-    endfor
-    return join(values(buffer_numbers))
-  endfunction
 
 " }
