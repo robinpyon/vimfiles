@@ -26,7 +26,7 @@
   Plug 'tweekmonster/fzf-filemru'                   " FZF MRU plugin
 
   Plug 'chriskempson/base16-vim'                    " Base 16 color theme
-  Plug 'sheerun/vim-polyglot'                       " Syntax and indent support for most languages
+  " Plug 'sheerun/vim-polyglot'                       " Syntax and indent support for most languages
   Plug 'w0rp/ale'                                   " Async linting
   Plug 'danro/rename.vim'
   Plug 'bling/vim-airline'                          " Statusbar
@@ -39,6 +39,7 @@
   Plug 'justinmk/vim-gtfo'                          " Go to terminal or file manager
   Plug 'justinmk/vim-sneak'
   Plug 'kshenoy/vim-signature'
+  Plug 'matze/vim-move'                             " Move lines / selections up and down
   Plug 'mattn/emmet-vim'                            " Emmet support
   Plug 'mhinz/vim-signify'
   Plug 'mileszs/ack.vim'
@@ -58,12 +59,13 @@
   Plug 'Shougo/vimfiler.vim'                        " File explorer
   Plug 'SirVer/ultisnips'                           " Snippets
   Plug 'vim-airline/vim-airline-themes'             " (Requires vim-airline) Color themes
+  Plug 'sbdchd/neoformat'
   Plug 'schickling/vim-bufonly'                     " Close all buffers except the current one
 
   " Filetype plugins:
-  Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
+  " Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
   Plug 'mxw/vim-jsx'                                " React JSX (syntax + indenting)
-  Plug 'posva/vim-vue'                              " Vue (syntax)
+  " Plug 'posva/vim-vue'                              " Vue (syntax) *** possibly slow ***
   Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
 
   " Unused:
@@ -165,6 +167,8 @@ endif
   set wildignore=*~,.git,tmp,*.log
   set wildmode=list:longest,full
 
+  hi Normal ctermbg=NONE guibg=NONE
+
   " Change cursor type when entering and exiting insert mode
   if has('cursorshape')
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -201,7 +205,7 @@ endif
     au BufEnter,BufRead,BufNewFile *.json.rabl,*.rabl,*.json_builder,*.assetfile,Rakefile,Assetfile,Guardfile setf ruby
 
     " Vue
-    " au BufRead,BufNewFile *.vue setf vue
+    au BufRead,BufNewFile *.vue setf javascript
 
     " .htaccess
     au BufNewFile,BufRead .htaccess setf apache
@@ -231,8 +235,8 @@ endif
   nnoremap <C-c> :Bdelete<CR>
 
   " Wrapped lines goes down/up to next row, rather than next line in file.
-  nnoremap j gj
-  nnoremap k gk
+  " nnoremap j gj
+  " nnoremap k gk
 
   " Properly interpret arrow keys when run within a tmux session
   if &term =~ '^screen'
@@ -324,7 +328,7 @@ endif
   nnoremap <C-P>              :FZF<CR>
 
   " Buffers
-  nnoremap <C-B>              :Buffers<CR>
+  " nnoremap <C-B>              :Buffers<CR>
 " }
 
 " COMMANDS {

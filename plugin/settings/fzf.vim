@@ -13,4 +13,5 @@ command! -bang -nargs=* Ag
 " - down / up / left / right
 let g:fzf_layout = { 'up': '~20%' }
 
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 let $FZF_DEFAULT_OPTS = '--reverse'
