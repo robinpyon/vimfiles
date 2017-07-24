@@ -321,6 +321,12 @@ endif
   nnoremap <silent><Leader>A  :Ack!<CR>
   nnoremap <C-A>              :Ag<CR>
 
+  " The Silver Searcher
+  if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+  endif
+
   " MRU
   nnoremap <silent><Leader>m  :ProjectMru<CR>
 
