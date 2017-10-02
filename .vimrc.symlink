@@ -30,10 +30,10 @@
   Plug 'w0rp/ale'                                   " Async linting
   Plug 'danro/rename.vim'
   Plug 'bling/vim-airline'                          " Statusbar
-  Plug 'dkprice/vim-easygrep'
   Plug 'easymotion/vim-easymotion'
   Plug 'editorconfig/editorconfig-vim'              " .editorconfig support
   Plug 'ervandew/supertab'
+  Plug 'flowtype/vim-flow'                          " Flow integration
   Plug 'jeffkreeftmeijer/vim-numbertoggle'          " Toggle between relative / absolute line numbers depending on context
   Plug 'jiangmiao/auto-pairs'
   Plug 'justinmk/vim-gtfo'                          " Go to terminal or file manager
@@ -42,9 +42,10 @@
   Plug 'matze/vim-move'                             " Move lines / selections up and down
   Plug 'mattn/emmet-vim'                            " Emmet support
   Plug 'mhinz/vim-signify'
-  Plug 'mileszs/ack.vim'
+  Plug 'dyng/ctrlsf.vim'
   Plug 'osyo-manga/vim-anzu'
   Plug 'takac/vim-hardtime'                         " Limit movement keys
+  Plug 'terryma/vim-multiple-cursors'
   Plug 'tommcdo/vim-exchange'
   Plug 'tomtom/tcomment_vim'                        " File type specific comments
   Plug 'tpope/vim-endwise'
@@ -316,16 +317,23 @@ endif
         \set background=light <Bar>
         \endif<cr>
 
-  " Grep
-  nnoremap <Leader>a          :Ack!<Space>
-  nnoremap <silent><Leader>A  :Ack!<CR>
-  nnoremap <C-A>              :Ag<CR>
+  " CtrlSF
+  nnoremap <Leader>a          :CtrlSF<Space>
+  nmap <C-S>f                 <Plug>CtrlSFPrompt
+  vmap <C-S>f                 <Plug>CtrlSFVwordPath
+  nmap <C-S>n                 <Plug>CtrlSFCwordPath
+  nnoremap <C-S>o             :CtrlSFOpen<CR>
+  nnoremap <C-S>t             :CtrlSFToggle<CR>
+  inoremap <C-S>t             <Esc>:CtrlSFToggle<CR>
 
-  " The Silver Searcher
+  " AG
   if executable('ag')
     " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
+    set grepprg=ag\ --nogroup\ --nocolor\ --hidden
   endif
+
+  " FZF
+  nnoremap <C-A>              :Ag<CR>
 
   " MRU
   nnoremap <silent><Leader>m  :ProjectMru<CR>

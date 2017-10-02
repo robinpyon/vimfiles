@@ -1,10 +1,16 @@
 # Node
 
 snippet writeHead "Write header" w
-writeHead(${1:200}, {'Content-Type': ${2:'text/plain'}});
+writeHead(${1:200}, {'Content-Type': ${2:'text/plain'}})
 endsnippet
 
 # General
+
+snippet afa "Arrow function with arguments" w
+(${1}) => {
+  ${2}
+}
+endsnippet
 
 snippet afn "Arrow function" w
 () => {
@@ -21,23 +27,23 @@ snippet bfn "Anonymous function declaration (wrapped with bind)" w
 endsnippet
 
 snippet ci "Console.info()" w
-console.info(${1});
+console.info(${1})
 endsnippet
 
 snippet cl "Console.log()" w
-console.log(${1});
+console.log(${1})
 endsnippet
 
 snippet ccw "Console.warn('$1:', $1)"
-console.warn('${1}:', $1);
+console.warn('${1}:', $1)
 endsnippet
 
 snippet cci "Console.info('$1:', $1)"
-console.info('${1}:', $1);
+console.info('${1}:', $1)
 endsnippet
 
 snippet ccl "Console.log('$1:', $1)"
-console.log('${1}:', $1);
+console.log('${1}:', $1)
 endsnippet
 
 snippet efn "Anonymous function expression" w
@@ -82,11 +88,16 @@ for (var ${2:i}=${1:Things}.length-1; $2>=0; $2--) {
 }
 endsnippet
 
-snippet pkg "Template package.json file" b
-{
-	"name": "${1:...}",
-	"version": "${2:0.0.1}",
-	"private": "true"
-}
+# React
+
+snippet rmapst "react-redux: map state to props"
+const mapStateToProps = state => ({
+  ${1}
+})
 endsnippet
 
+snippet rmapd "react-redux: map dispatch to props"
+const mapDispatchToProps = dispatch => ({
+  ${1}
+})
+endsnippet

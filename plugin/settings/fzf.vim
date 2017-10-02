@@ -4,7 +4,7 @@
 
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
-  \                 '--color-path "33;1"',
+  \                 '--hidden --color-path "33;1"',
   \                 <bang>0 ? fzf#vim#with_preview('right:50%')
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
