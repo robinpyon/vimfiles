@@ -63,11 +63,14 @@
   Plug 'sbdchd/neoformat'
   Plug 'schickling/vim-bufonly'                     " Close all buffers except the current one
 
+  Plug 'hail2u/vim-css3-syntax'                     " CSS3 syntax for vim's built-in syntax/css.vim
+
   " Filetype plugins:
   " Plug 'tikhomirov/vim-glsl'                        " GLSL (syntax)
   Plug 'mxw/vim-jsx'                                " React JSX (syntax + indenting)
   " Plug 'posva/vim-vue'                              " Vue (syntax) *** possibly slow ***
-  Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
+  " Plug 'stephpy/vim-yaml'                           " YAML (syntax) - faster than VIM core's syntax
+  Plug 'styled-components/vim-styled-components'    " Styled Components syntax in JS
 
   " Unused:
   " Plug 'evanmiller/nginx-vim-syntax'               " Nginx (syntax)
@@ -78,11 +81,14 @@
   " - Dash:
   " Plug 'rizzatti/dash.vim'
   " - Tags:
+  " Plug 'ludovicchabant/vim-gutentags'
   " Plug 'majutsushi/tagbar'
-  " Plug 'xolox/vim-misc'
   " Plug 'xolox/vim-easytags'
-  " Plug 'marijnh/tern_for_vim'
   " Plug 'szw/vim-tags'
+
+  " Plug 'xolox/vim-misc'
+
+  Plug 'marijnh/tern_for_vim'
 
   " Initialize plugin system
   call plug#end()
